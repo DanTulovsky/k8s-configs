@@ -1,0 +1,24 @@
+---
+postgresql:
+  pdb:
+    create: true
+    minAvailable: 1
+  existingSecret: postgresql-secret
+  audit:
+    logConnections: true
+    logDisconnections: true
+
+pgpool:
+  enableLogConnections: true
+  enableLogPerNodeStatement: true
+  customUsersSecret: postgresql-pgpool-secret
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+
+persistence:
+  size: 64Gi
+

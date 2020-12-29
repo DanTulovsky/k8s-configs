@@ -1,0 +1,17 @@
+persistence:
+  enabled: true
+  accessModes:
+  - ReadWriteOnce
+  size: 64Gi
+  annotations: {}
+  # selector:
+  #   matchLabels:
+  #     app.kubernetes.io/name: loki
+  # subPath: ""
+  # existingClaim:
+
+serviceMonitor:
+  additionalLabels: {}
+  annotations: {}
+  enabled: true
+  interval: "15s"

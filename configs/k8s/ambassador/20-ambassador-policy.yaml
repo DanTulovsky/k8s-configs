@@ -1,0 +1,19 @@
+---
+apiVersion: getambassador.io/v2
+kind: FilterPolicy
+metadata:
+  name: pepper-poker-policy
+  namespace: ambassador
+spec:
+  rules:
+    - host: "pepper-poker.wetsnow.com"
+      # note that "/" only protects "/" and not "/foo"
+      path: "*"
+      filters:
+        - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
+          arguments:
+            scope:
+            - "email"
+            - "profile"
+            # - "roles"
+            # - "web-origins"

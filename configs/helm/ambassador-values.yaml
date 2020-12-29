@@ -1,0 +1,30 @@
+licenseKey:
+  value: eyJhbGciOiJQUzUxMiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlX2tleV92ZXJzaW9uIjoidjIiLCJjdXN0b21lcl9pZCI6ImRhbnRAd2V0c25vdy5jb20tMTYwMTczOTkwNCIsImN1c3RvbWVyX2VtYWlsIjoiZGFudEB3ZXRzbm93LmNvbSIsImVuYWJsZWRfZmVhdHVyZXMiOlsiIiwiZmlsdGVyIiwicmF0ZWxpbWl0IiwidHJhZmZpYyIsImRldnBvcnRhbCJdLCJlbmZvcmNlZF9saW1pdHMiOlt7ImwiOiJkZXZwb3J0YWwtc2VydmljZXMiLCJ2Ijo1fSx7ImwiOiJyYXRlbGltaXQtc2VydmljZSIsInYiOjV9LHsibCI6ImF1dGhmaWx0ZXItc2VydmljZSIsInYiOjV9LHsibCI6InRyYWZmaWMtdXNlcnMiLCJ2Ijo1fV0sIm1ldGFkYXRhIjp7fSwiZXhwIjoxNjMzMjc1OTA0LCJpYXQiOjE2MDE3Mzk5MDQsIm5iZiI6MTYwMTczOTkwNH0.Icy-rnMaYaTQ2AkyB_hB1qAoaJJuQ4gSFvai6ywGijq5XmEhXsX22qrm7Pem4SYVL1v0HB_8XSqS9k8MfrasYZupZQcqcIJHhDmjiO4AdKGOzB2JdiGe340iFzgcZOGEEyG6qMP32dFBS4jNhRtqWnBc5EmwOrpQhl7ue7DwQ0lTXQGdEdB43mzztqH_kL_AbW79HOwPU0fxPAHZbGEfGM6LJwIkOxTM5TMgVtAXkTfPOUl3Z9wN2Vxj5d8e2owrhguAd9czCumFJD69Fl-lMHgBpi6v6xt20-p7HwJR0fkaHpB-gm-Iu_sgSYn7yPLtUvfxE_CCzlcYmlmsDGL5Mw
+  annotations: {}
+  createSecret: true
+metrics:
+  serviceMonitor:
+    enabled: true
+resources:
+  limits:
+    cpu: 1000m
+    memory: 600Mi
+  requests:
+    cpu: 200m
+    memory: 300Mi
+service:
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "do.wetsnow.com"
+    service.beta.kubernetes.io/do-loadbalancer-algorithm: "least_connections"
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "tcp"
+  externalIPs: []
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8443
+  type: LoadBalancer
+  externalTrafficPolicy: Local

@@ -1,0 +1,35 @@
+cloneStaticSiteFromGit:
+  enabled: true
+  ## Repository to clone static content from
+  ##
+  repository: https://github.com/DanTulovsky/wetsnow.com.git
+  ## Branch inside the git repository
+  ##
+  branch: main
+  ## Interval for sidecar container pull from the repository
+  ##
+  interval: 60
+
+replicaCount: 2
+
+service:
+  type: ClusterIP
+  port: 80
+  httpsPort: 443
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+  namespace: monitoring
+  selector:
+    prometheus: prometheus
+
+pdb:
+  create: true
+  ## Min number of pods that must still be available after the eviction
+  ##
+  minAvailable: 1
+  ## Max number of pods that can be unavailable after the eviction
+  ##
+  # maxUnavailable: 1

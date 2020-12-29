@@ -1,0 +1,15 @@
+---
+apiVersion: getambassador.io/v2
+kind: Filter
+metadata:
+  name: keycloak-pepper-poker-filter
+  namespace: ambassador
+spec:
+  OAuth2:
+    authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
+    audience: ambassador
+    clientID: ambassador
+    # TODO: fix this
+    secretName: ambassador-keycloak-secret
+    protectedOrigins:
+    - origin: https://pepper-poker.wetsnow.com

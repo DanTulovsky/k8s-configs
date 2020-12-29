@@ -1,0 +1,108 @@
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: pepper-poker.wetsnow.com
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  requestPolicy:
+    insecure:
+      action: Reject
+  hostname: pepper-poker.wetsnow.com
+  tlsSecret:
+    name: pepper-poker.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: TLSContext
+metadata:
+  name: pepper-poker.wetsnow.com-context # for the host above
+spec:
+  hosts:
+  - "pepper-poker.wetsnow.com"
+  secret: pepper-poker.wetsnow.com
+  alpn_protocols: h2,http/1.1 # required for C# grpc client
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: grafana.wetsnow.com
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: grafana.wetsnow.com
+  tlsSecret:
+    name: grafana.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: TLSContext
+metadata:
+  name: grafana.wetsnow.com-context # for the host above
+spec:
+  hosts:
+  - "grafana.wetsnow.com"
+  secret: grafana.wetsnow.com
+  alpn_protocols: h2,http/1.1 # required for C# grpc client
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: login.wetsnow.com
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: login.wetsnow.com
+  tlsSecret:
+    name: login.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: TLSContext
+metadata:
+  name: login.wetsnow.com-context # for the host above
+spec:
+  hosts:
+  - "login.wetsnow.com"
+  secret: login.wetsnow.com
+  alpn_protocols: h2,http/1.1 # required for C# grpc client
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: do.wetsnow.com
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: do.wetsnow.com
+  tlsSecret:
+    name: do.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: TLSContext
+metadata:
+  name: do.wetsnow.com-context # for the host above
+spec:
+  hosts:
+  - "do.wetsnow.com"
+  secret: do.wetsnow.com
+  alpn_protocols: h2,http/1.1 # required for C# grpc client
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: www.wetsnow.com
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: www.wetsnow.com
+  tlsSecret:
+    name: www.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: TLSContext
+metadata:
+  name: www.wetsnow.com-context # for the host above
+spec:
+  hosts:
+  - "www.wetsnow.com"
+  - "wetsnow.com"
+  secret: www.wetsnow.com
+  alpn_protocols: h2,http/1.1 # required for C# grpc client

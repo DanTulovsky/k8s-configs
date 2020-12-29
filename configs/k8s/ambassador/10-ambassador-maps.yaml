@@ -1,0 +1,85 @@
+apiVersion: getambassador.io/v2
+kind: KubernetesEndpointResolver
+metadata:
+  name: endpoint
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: pepper-poker-grpc-server-mapping
+spec:
+  prefix: /poker.PokerServer/
+  rewrite: /poker.PokerServer/
+  service: https://pepper-poker-grpc-service.poker:8443
+  timeout_ms: 0 # required for grpc
+  grpc: True
+  # tls: upstream
+  headers:
+    :authority: pepper-poker.wetsnow.com
+  resolver: endpoint
+  load_balancer:
+    policy: least_request
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: pepper-poker-grpcreflect
+spec:
+  grpc: true
+  # tls: upstream
+  prefix: /grpc.
+  rewrite: /grpc.
+  service: https://pepper-poker-grpc-service.poker:8443
+  headers:
+    :authority: pepper-poker.wetsnow.com
+  resolver: endpoint
+  load_balancer:
+    policy: least_request
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: pepper-poker-http-server-mapping
+spec:
+  prefix: /
+  service: pepper-poker-http-service.poker:8081
+  # tls: upstream
+  host: "pepper-poker.wetsnow.com"
+  resolver: endpoint
+  load_balancer:
+    policy: least_request
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: grafana
+spec:
+  prefix: /
+  allow_upgrade:
+  - websocket
+  host: grafana.wetsnow.com
+  resolver: endpoint
+  service: grafana.monitoring:80
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: login
+spec:
+  prefix: /
+  host: login.wetsnow.com
+  resolver: endpoint
+  service: keycloak.auth:8080
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: wetsnow.com
+spec:
+  prefix: /
+  host: www.wetsnow.com
+  resolver: endpoint
+  service: nginx.web:80
+
+
+
