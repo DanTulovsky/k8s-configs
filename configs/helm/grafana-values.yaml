@@ -1,24 +1,8 @@
 replicas: 2
 
-## See `kubectl explain poddisruptionbudget.spec` for more
-## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
 podDisruptionBudget:
  minAvailable: 1
-#  maxUnavailable: 1
 
-## Pod Annotations
-# podAnnotations: {}
-
-## Pod Labels
-# podLabels: {}
-
-## Deployment annotations
-# annotations: {}
-
-## Expose the grafana service to be accessed from outside the cluster (LoadBalancer service).
-## or access it from within the cluster (ClusterIP service). Set the service type and the port to serve it.
-## ref: http://kubernetes.io/docs/user-guide/services/
-##
 service:
   type: ClusterIP
   port: 80
@@ -44,15 +28,9 @@ serviceMonitor:
   scrapeTimeout: 30s
   relabelings: []
 
-## Enable persistence using Persistent Volume Claims
-## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ## Everything is in the db.
 persistence:
   enabled: false
-
-# Administrator credentials when not using an existing secret (see below)
-adminUser: admin
-# adminPassword: strongpassword
 
 # Use an existing secret for the admin user.
 admin:
@@ -60,7 +38,6 @@ admin:
   userKey: admin-user
   passwordKey: admin-password
 
-## Define command t
 ## The name of a secret in the same kubernetes namespace which contain values to be added to the environment
 ## This can be useful for auth tokens, etc. Value is templated.
 envFromSecret: "grafana-env-secret"
@@ -71,8 +48,6 @@ plugins:
   - grafana-piechart-panel
 
 ## Configure grafana datasources
-## ref: http://docs.grafana.org/administration/provisioning/#datasources
-##
 datasources:
  datasources.yaml:
    apiVersion: 1
@@ -84,8 +59,6 @@ datasources:
      isDefault: true
 
 ## Configure notifiers
-## ref: http://docs.grafana.org/administration/provisioning/#alert-notification-channels
-##
 notifiers:
  notifiers.yaml:
    notifiers:
@@ -102,10 +75,6 @@ notifiers:
    delete_notifiers:
 
 ## Configure grafana dashboard providers
-## ref: http://docs.grafana.org/administration/provisioning/#dashboards
-##
-## `path` must be /var/lib/grafana/dashboards/<provider_name>
-##
 dashboardProviders:
  dashboardproviders.yaml:
    apiVersion: 1
@@ -199,15 +168,14 @@ dashboards:
       gnetId: 10880
       revision: 1
       datasource: Prometheus
+    loki-stats:
+      gnetId: 13407
+      revision: 1
+      datasource: Prometheus
     nginx:
       gnetId: 11199
       revision: 1
       datasource: Prometheus
-  #   local-dashboard:
-  #     url: https://example.com/repository/test.json
-  #   local-dashboard-base64:
-  #     url: https://example.com/repository/test-b64.json
-  #     b64content: true
 
 
 ## Grafana's primary configuration
