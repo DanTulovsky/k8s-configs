@@ -1,17 +1,16 @@
 replicas: 2
 
 podDisruptionBudget:
- minAvailable: 1
+  minAvailable: 1
 
 service:
   type: ClusterIP
   port: 80
-  targetPort: grafana
+  targetPort:
+    grafana
     # targetPort: 4181 To be used with a proxy extraContainer
   annotations: {}
-  labels: {
-    "service": "grafana"
-    }
+  labels: { "service": "grafana" }
   portName: service
 
 serviceMonitor:
@@ -46,48 +45,49 @@ envFromSecret: "grafana-env-secret"
 ##
 plugins:
   - grafana-piechart-panel
+  - grafana-worldmap-panel
 
 ## Configure grafana datasources
 datasources:
- datasources.yaml:
-   apiVersion: 1
-   datasources:
-   - name: Prometheus
-     type: prometheus
-     url: http://kube-prometheus-prometheus:9090
-     access: proxy
-     isDefault: true
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://kube-prometheus-prometheus:9090
+        access: proxy
+        isDefault: true
 
 ## Configure notifiers
 notifiers:
- notifiers.yaml:
-   notifiers:
-   - name: email-notifier
-     type: email
-     uid: email1
-     # either:
-     org_id: 1
-     # or
-     org_name: Main Org.
-     is_default: true
-     settings:
-       addresses: dant@wetsnow.com
-   delete_notifiers:
+  notifiers.yaml:
+    notifiers:
+      - name: email-notifier
+        type: email
+        uid: email1
+        # either:
+        org_id: 1
+        # or
+        org_name: Main Org.
+        is_default: true
+        settings:
+          addresses: dant@wetsnow.com
+    delete_notifiers:
 
 ## Configure grafana dashboard providers
 dashboardProviders:
- dashboardproviders.yaml:
-   apiVersion: 1
-   providers:
-   - name: 'default'
-     orgId: 1
-     folder: ''
-     type: file
-     disableDeletion: false
-     allowUiUpdates: true
-     editable: true
-     options:
-       path: /var/lib/grafana/dashboards/default
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: "default"
+        orgId: 1
+        folder: ""
+        type: file
+        disableDeletion: false
+        allowUiUpdates: true
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
 
 ## Configure grafana dashboard to import
 ## NOTE: To use dashboards you must also enable/configure dashboardProviders
@@ -97,11 +97,11 @@ dashboardProviders:
 ##
 dashboards:
   default:
-  #   some-dashboard:
-  #     json: |
-  #       $RAW_JSON
-  #   custom-dashboard:
-  #     file: dashboards/custom-dashboard.json
+    #   some-dashboard:
+    #     json: |
+    #       $RAW_JSON
+    #   custom-dashboard:
+    #     file: dashboards/custom-dashboard.json
     ambassador:
       gnetId: 10434
       revision: 1
@@ -177,7 +177,6 @@ dashboards:
       revision: 1
       datasource: Prometheus
 
-
 ## Grafana's primary configuration
 ## NOTE: values in map will be converted to ini format
 ## ref: http://docs.grafana.org/installation/configuration/
@@ -200,7 +199,7 @@ grafana.ini:
     from_address: "grafana@wetsnow.com"
     from_name: "Grafana"
   server:
-      # The full public facing url you use in browser, used for redirects and emails
+    # The full public facing url you use in browser, used for redirects and emails
     root_url: https://grafana.wetsnow.com
   auth:
     oauth_auto_login: false

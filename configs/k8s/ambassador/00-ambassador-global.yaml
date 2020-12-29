@@ -1,7 +1,8 @@
 apiVersion: getambassador.io/v2
-kind:  Module
+kind: Module
 metadata:
-  name:  ambassador
+  name: ambassador
 spec:
   config:
     use_proxy_proto: true
+    envoy_log_type: json

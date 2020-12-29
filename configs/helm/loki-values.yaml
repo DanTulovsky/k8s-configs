@@ -1,7 +1,7 @@
 persistence:
   enabled: true
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   size: 64Gi
   annotations: {}
 
@@ -12,6 +12,8 @@ serviceMonitor:
   interval: "15s"
 
 config:
+  limits_config:
+    max_query_series: 1000
   table_manager:
     retention_deletes_enabled: true
     retention_period: "180d"
