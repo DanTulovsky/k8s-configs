@@ -15,7 +15,7 @@ spec:
   grpc: True
   # tls: upstream
   headers:
-    :authority: pepper-poker.wetsnow.com
+    :authority: pepper-poker-grpc.wetsnow.com
   resolver: endpoint
   load_balancer:
     policy: least_request
@@ -31,7 +31,7 @@ spec:
   rewrite: /grpc.
   service: https://pepper-poker-grpc-service.poker:8443
   headers:
-    :authority: pepper-poker.wetsnow.com
+    :authority: pepper-poker-grpc.wetsnow.com
   resolver: endpoint
   load_balancer:
     policy: least_request
@@ -56,7 +56,7 @@ metadata:
 spec:
   prefix: /
   allow_upgrade:
-  - websocket
+    - websocket
   host: grafana.wetsnow.com
   resolver: endpoint
   service: grafana.monitoring:80
@@ -80,6 +80,3 @@ spec:
   host: www.wetsnow.com
   resolver: endpoint
   service: nginx.web:80
-
-
-
