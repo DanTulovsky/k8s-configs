@@ -1,0 +1,182 @@
+nameOverride: argocd
+
+# Optional CRD installation for those without Helm hooks
+installCRDs: false
+
+## Controller
+controller:
+  name: application-controller
+
+  ## Server metrics controller configuration
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8082
+    serviceMonitor:
+      enabled: true
+      selector:
+        prometheus: prometheus
+      namespace: monitoring
+    #   additionalLabels: {}
+    rules:
+      enabled: true
+      spec:
+        - alert: ArgoAppMissing
+          expr: |
+            absent(argocd_app_info)
+          for: 15m
+          labels:
+            severity: critical
+          annotations:
+            summary: "[ArgoCD] No reported applications"
+            description: >
+              ArgoCD has not reported any applications data for the past 15 minutes which
+              means that it must be down or not functioning properly.  This needs to be
+              resolved for this cloud to continue to maintain state.
+        - alert: ArgoAppNotSynced
+          expr: |
+            argocd_app_sync_status{sync_status!="Synced"} == 1
+          for: 12h
+          labels:
+            severity: warning
+          annotations:
+            summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
+            description: >
+              The application [{{`{{$labels.name}}`}} has not been synchronized for over
+              12 hours which means that the state of this cloud has drifted away from the
+              state inside Git.
+      selector:
+        prometheus: prometheus
+      namespace: monitoring
+      additionalLabels: {}
+
+## Dex
+dex:
+  enabled: true
+  name: dex-server
+
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+    serviceMonitor:
+      enabled: true
+
+server:
+  name: server
+
+  ## Server metrics service configuration
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8083
+    serviceMonitor:
+      enabled: true
+      selector:
+        prometheus: prometheus
+      namespace: monitoring
+      additionalLabels: {}
+
+  ## ArgoCD config
+  ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
+  config:
+    # Argo CD's externally facing base URL (optional). Required when configuring SSO
+    url: https://argocd.wetsnow.com
+    # Argo CD instance label key
+    application.instanceLabelKey: argocd.argoproj.io/instance
+    # repositories: |
+    #   - url: git@github.com:group/repo.git
+    #     sshPrivateKeySecret:
+    #       name: secret-name
+    #       key: sshPrivateKey
+    #   - type: helm
+    #     url: https://kubernetes-charts.storage.googleapis.com
+    #     name: stable
+    #   - type: helm
+    #     url: https://argoproj.github.io/argo-helm
+    #     name: argo
+    # oidc.config: |
+    #   name: AzureAD
+    #   issuer: https://login.microsoftonline.com/TENANT_ID/v2.0
+    #   clientID: CLIENT_ID
+    #   clientSecret: $oidc.azuread.clientSecret
+    #   requestedIDTokenClaims:
+    #     groups:
+    #       essential: true
+    #   requestedScopes:
+    #     - openid
+    #     - profile
+    #     - email
+
+  ## Annotations to be added to ArgoCD ConfigMap
+  configAnnotations: {}
+
+  ## ArgoCD rbac config
+  ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
+  rbacConfig:
+    {}
+    # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
+    # Policy rules are in the form:
+    #   p, subject, resource, action, object, effect
+    # Role definitions and bindings are in the form:
+    #   g, subject, inherited-subject
+    # See https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md for additional information.
+    # policy.csv: |
+    #   # Grant all members of the group 'my-org:team-alpha; the ability to sync apps in 'my-project'
+    #   p, my-org:team-alpha, applications, sync, my-project/*, allow
+    #   # Grant all members of 'my-org:team-beta' admins
+    #   g, my-org:team-beta, role:admin
+    # policy.default is the name of the default role which Argo CD will falls back to, when
+    # authorizing API requests (optional). If omitted or empty, users may be still be able to login,
+    # but will see no apps, projects, etc...
+    # policy.default: role:readonly
+    # scopes controls which OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
+    # If omitted, defaults to: '[groups]'. The scope value can be a string, or a list of strings.
+    # scopes: '[cognito:groups, email]'
+
+  ## Annotations to be added to ArgoCD rbac ConfigMap
+  rbacConfigAnnotations: {}
+
+repoServer:
+  name: repo-server
+
+  ## Repo server metrics service configuration
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8084
+    serviceMonitor:
+      enabled: true
+      selector:
+        prometheus: prometheus
+      namespace: monitoring
+      additionalLabels: {}
+
+  ## Use init containers to configure custom tooling
+  ## https://argoproj.github.io/argo-cd/operator-manual/custom_tools/
+  ## When using the volumes & volumeMounts section bellow, please comment out those above.
+  #  volumes:
+  #  - name: custom-tools
+  #    emptyDir: {}
+  #
+  #  initContainers:
+  #  - name: download-tools
+  #    image: alpine:3.8
+  #    command: [sh, -c]
+  #    args:
+  #      - wget -qO- https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz | tar -xvzf - &&
+  #        mv linux-amd64/helm /custom-tools/
+  #    volumeMounts:
+  #      - mountPath: /custom-tools
+  #        name: custom-tools
+  #  volumeMounts:
+  #  - mountPath: /usr/local/bin/helm
+  #    name: custom-tools
+  #    subPath: helm
