@@ -1,0 +1,30 @@
+name: Docker
+
+on:
+  push:
+    # Publish `main` as Docker `latest` image.
+    branches:
+      - main
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  IMAGE_NAME: server
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 cluster-1
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl --namespace ambassador apply -f $GITHUB_WORKSPACE/configs/ambassador/k8s/
