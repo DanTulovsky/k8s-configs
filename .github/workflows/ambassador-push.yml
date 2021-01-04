@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+    paths:
+      - "configs/ambassador/k8s/*"
+
   # Run tests for any PRs.
   pull_request:
 
