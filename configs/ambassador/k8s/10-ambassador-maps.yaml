@@ -97,5 +97,6 @@ spec:
   host: n8n.wetsnow.com
   resolver: endpoint
   service: n8n.n8n:80
+  timeout_ms: 0 # required for grpc
   allow_upgrade:
     - websocket
