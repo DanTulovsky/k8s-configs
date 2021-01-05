@@ -122,17 +122,17 @@ spec:
   hostname: www.wetsnow.com
   tlsSecret:
     name: www.wetsnow.com
----
-apiVersion: getambassador.io/v2
-kind: TLSContext
-metadata:
-  name: www.wetsnow.com-context # for the host above
-spec:
-  hosts:
-    - "www.wetsnow.com"
-    - "wetsnow.com"
-  secret: www.wetsnow.com
-  alpn_protocols: h2,http/1.1 # required for C# grpc client
+# ---
+# apiVersion: getambassador.io/v2
+# kind: TLSContext
+# metadata:
+#   name: www.wetsnow.com-context # for the host above
+# spec:
+#   hosts:
+#     - "www.wetsnow.com"
+#     - "wetsnow.com"
+#   secret: www.wetsnow.com
+#   alpn_protocols: h2,http/1.1 # required for C# grpc client
 ---
 apiVersion: getambassador.io/v2
 kind: Host
