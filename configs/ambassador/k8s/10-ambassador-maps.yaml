@@ -7,6 +7,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: pepper-poker-grpc-server-mapping
+  namespace: ambassador
 spec:
   prefix: /poker.PokerServer/
   rewrite: /poker.PokerServer/
@@ -24,6 +25,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: pepper-poker-grpcreflect
+  namespace: ambassador
 spec:
   grpc: true
   # tls: upstream
@@ -40,6 +42,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: pepper-poker-http-server-mapping
+  namespace: ambassador
 spec:
   prefix: /
   service: pepper-poker-http-service.poker:8081
@@ -53,6 +56,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: grafana
+  namespace: ambassador
 spec:
   prefix: /
   allow_upgrade:
@@ -65,6 +69,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: login
+  namespace: ambassador
 spec:
   prefix: /
   host: login.wetsnow.com
@@ -75,6 +80,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: wetsnow.com
+  namespace: ambassador
 spec:
   prefix: /
   host: www.wetsnow.com
@@ -85,8 +91,11 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: n8n.wetsnow.com
+  namespace: ambassador
 spec:
   prefix: /
   host: n8n.wetsnow.com
   resolver: endpoint
   service: n8n.n8n:80
+  allow_upgrade:
+    - websocket

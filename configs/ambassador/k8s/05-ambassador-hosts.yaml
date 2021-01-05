@@ -2,6 +2,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: pepper-poker.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
@@ -16,6 +17,7 @@ apiVersion: getambassador.io/v2
 kind: TLSContext
 metadata:
   name: pepper-poker.wetsnow.com-context # for the host above
+  namespace: ambassador
 spec:
   hosts:
     - "pepper-poker.wetsnow.com"
@@ -26,6 +28,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: pepper-poker-grpc.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
@@ -40,6 +43,7 @@ apiVersion: getambassador.io/v2
 kind: TLSContext
 metadata:
   name: pepper-poker-grpc.wetsnow.com-context # for the host above
+  namespace: ambassador
 spec:
   hosts:
     - "pepper-poker-grpc.wetsnow.com"
@@ -50,6 +54,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: grafana.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
@@ -61,6 +66,7 @@ apiVersion: getambassador.io/v2
 kind: TLSContext
 metadata:
   name: grafana.wetsnow.com-context # for the host above
+  namespace: ambassador
 spec:
   hosts:
     - "grafana.wetsnow.com"
@@ -71,6 +77,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: login.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
@@ -82,6 +89,7 @@ apiVersion: getambassador.io/v2
 kind: TLSContext
 metadata:
   name: login.wetsnow.com-context # for the host above
+  namespace: ambassador
 spec:
   hosts:
     - "login.wetsnow.com"
@@ -92,6 +100,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: do.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
@@ -103,6 +112,7 @@ apiVersion: getambassador.io/v2
 kind: TLSContext
 metadata:
   name: do.wetsnow.com-context # for the host above
+  namespace: ambassador
 spec:
   hosts:
     - "do.wetsnow.com"
@@ -113,6 +123,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: www.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
@@ -138,6 +149,7 @@ apiVersion: getambassador.io/v2
 kind: Host
 metadata:
   name: n8n.wetsnow.com
+  namespace: ambassador
 spec:
   acmeProvider:
     email: dant@wetsnow.com
