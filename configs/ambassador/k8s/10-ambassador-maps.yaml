@@ -80,3 +80,13 @@ spec:
   host: www.wetsnow.com
   resolver: endpoint
   service: nginx.web:80
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: n8n.wetsnow.com
+spec:
+  prefix: /
+  host: n8n.wetsnow.com
+  resolver: endpoint
+  service: n8n.n8n:80

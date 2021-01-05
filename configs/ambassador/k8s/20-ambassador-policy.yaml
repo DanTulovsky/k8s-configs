@@ -17,13 +17,23 @@ spec:
               - "email"
               - "profile"
               - "poker"
-    - host: "pepper-poker-grpc.wetsnow.com"
+    - host: "n8n.wetsnow.com"
       # note that "/" only protects "/" and not "/foo"
-      # path: "*"
-      # filters:
-      #   - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
-      #     arguments:
-      #       scope:
-      #         - "poker" # this scope is required to use this endpoint
-      #         - "email"
-      #         - "profile"
+      path: "*"
+      filters:
+        - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
+          arguments:
+            scope:
+              # required scopes
+              - "email"
+              - "profile"
+    # - host: "pepper-poker-grpc.wetsnow.com"
+    # note that "/" only protects "/" and not "/foo"
+    # path: "*"
+    # filters:
+    #   - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
+    #     arguments:
+    #       scope:
+    #         - "poker" # this scope is required to use this endpoint
+    #         - "email"
+    #         - "profile"

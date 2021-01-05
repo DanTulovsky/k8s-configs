@@ -133,3 +133,17 @@ spec:
     - "wetsnow.com"
   secret: www.wetsnow.com
   alpn_protocols: h2,http/1.1 # required for C# grpc client
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: n8n.wetsnow.com
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  requestPolicy:
+    insecure:
+      action: Redirect
+  hostname: n8n.wetsnow.com
+  tlsSecret:
+    name: n8n.wetsnow.com

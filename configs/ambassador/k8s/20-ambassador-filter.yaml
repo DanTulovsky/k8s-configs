@@ -13,3 +13,4 @@ spec:
     protectedOrigins:
       - origin: https://pepper-poker.wetsnow.com
       - origin: https://pepper-poker-grpc.wetsnow.com
+      - origin: https://n8n.wetsnow.com
