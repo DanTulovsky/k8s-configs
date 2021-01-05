@@ -21,12 +21,13 @@ spec:
       # note that "/" only protects "/" and not "/foo"
       path: "*"
       filters:
-        - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
+        - name: keycloak-n8n-filter ## Enter the Filter name from above
           arguments:
             scope:
               # required scopes
               - "email"
               - "profile"
+              - "n8n"
     # - host: "pepper-poker-grpc.wetsnow.com"
     # note that "/" only protects "/" and not "/foo"
     # path: "*"
