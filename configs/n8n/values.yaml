@@ -25,6 +25,9 @@ config: # Dict with all n8n json config options
       #   cert: # SSL certificate - default: ''
       #   key: # SSL key - default: ''
       #   rejectUnauthorized: # If unauthorized SSL connections should be rejected - default: true
+  host: "n8n.wetsnow.com"
+  # port: 443
+  protocol: "https"
 
 ## Common Kubernetes Config Settings
 persistence:
@@ -33,7 +36,3 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 5Gi
-
-host: "n8n.wetsnow.com"
-port: 443
-protocol: "https"

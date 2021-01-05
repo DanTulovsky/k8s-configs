@@ -37,6 +37,9 @@ spec:
   rules:
     - host: "n8n.wetsnow.com"
       # note that "/" only protects "/" and not "/foo"
+      path: "/webhook/*"
+    - host: "n8n.wetsnow.com"
+      # note that "/" only protects "/" and not "/foo"
       path: "*"
       filters:
         - name: keycloak-n8n-filter ## Enter the Filter name from above
