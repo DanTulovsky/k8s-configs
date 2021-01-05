@@ -33,3 +33,7 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 5Gi
+
+host: "n8n.wetsnow.com"
+port: 443
+protocol: "https"
