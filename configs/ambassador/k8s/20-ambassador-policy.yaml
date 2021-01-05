@@ -17,6 +17,24 @@ spec:
               - "email"
               - "profile"
               - "poker"
+    # - host: "pepper-poker-grpc.wetsnow.com"
+    # note that "/" only protects "/" and not "/foo"
+    # path: "*"
+    # filters:
+    #   - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
+    #     arguments:
+    #       scope:
+    #         - "poker" # this scope is required to use this endpoint
+    #         - "email"
+    #         - "profile"
+---
+apiVersion: getambassador.io/v2
+kind: FilterPolicy
+metadata:
+  name: n8n-policy
+  namespace: ambassador
+spec:
+  rules:
     - host: "n8n.wetsnow.com"
       # note that "/" only protects "/" and not "/foo"
       path: "*"
@@ -28,13 +46,3 @@ spec:
               - "email"
               - "profile"
               - "n8n"
-    # - host: "pepper-poker-grpc.wetsnow.com"
-    # note that "/" only protects "/" and not "/foo"
-    # path: "*"
-    # filters:
-    #   - name: keycloak-pepper-poker-filter ## Enter the Filter name from above
-    #     arguments:
-    #       scope:
-    #         - "poker" # this scope is required to use this endpoint
-    #         - "email"
-    #         - "profile"
