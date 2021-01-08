@@ -51,6 +51,9 @@ plugins:
 datasources:
   datasources.yaml:
     apiVersion: 1
+    # deleteDatasources:
+    #   - name: PrometheusLocal
+    #     orgId: 1
     datasources:
       - name: Prometheus
         type: prometheus

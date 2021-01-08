@@ -10,6 +10,17 @@ prometheus:
     port: 9090
     clusterIP: None
 
+  remoteWrite:
+    - url: https://metric-api.newrelic.com/prometheus/v1/write?prometheus_server=prometheus-cluster-1
+      # path is /etc/prometheus/secrets/<name_of_secret_from_below>/<key_of_secret>
+      bearerTokenFile: /etc/prometheus/secrets/prom-secret-files/relic_bearer_token
+
+  secrets:
+    - prom-secret-files
+
+  persistence:
+    enabled: true
+    size: 64G
 
 alertmanager:
   service:
@@ -17,18 +28,17 @@ alertmanager:
     port: 9093
     clusterIP: None
 
-
 node-exporter:
   serviceMonitor:
     enabled: true
     jobLabel: jobLabel
     relabelings:
-    - action: replace
-      regex: (.*)
-      replacement: $1
-      sourceLabels:
-      - __meta_kubernetes_pod_node_name
-      targetLabel: kubernetes_node
+      - action: replace
+        regex: (.*)
+        replacement: $1
+        sourceLabels:
+          - __meta_kubernetes_pod_node_name
+        targetLabel: kubernetes_node
 
   extraArgs:
     collector.filesystem.ignored-mount-points: "^/(dev|proc|sys|var/lib/docker/.+)($|/)"
@@ -46,7 +56,7 @@ kubelet:
 
   serviceMonitor:
     metricRelabelings:
-    - action: replace
-      sourceLabels:
-      - node
-      targetLabel: instance
+      - action: replace
+        sourceLabels:
+          - node
+        targetLabel: instance

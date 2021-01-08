@@ -29,6 +29,10 @@ config: # Dict with all n8n json config options
   # port: 443
   protocol: "https"
 
+# https://docs.n8n.io/reference/configuration.html#configuration
+extraEnv:
+  WEBHOOK_TUNNEL_URL: "https://n8n.wetsnow.com/"
+
 ## Common Kubernetes Config Settings
 persistence:
   enabled: true
