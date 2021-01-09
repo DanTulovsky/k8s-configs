@@ -2,6 +2,25 @@
 apiVersion: getambassador.io/v2
 kind: FilterPolicy
 metadata:
+  name: default-policy
+  namespace: ambassador
+spec:
+  rules:
+    - host: "locust.wetsnow.com"
+      # note that "/" only protects "/" and not "/foo"
+      path: "*"
+      filters:
+        - name: keycloak-default-filter ## Enter the Filter name from above
+          arguments:
+            scope:
+              # required scopes
+              - "email"
+              - "profile"
+              - "default"
+---
+apiVersion: getambassador.io/v2
+kind: FilterPolicy
+metadata:
   name: pepper-poker-policy
   namespace: ambassador
 spec:

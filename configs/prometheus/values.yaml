@@ -10,10 +10,10 @@ prometheus:
     port: 9090
     clusterIP: None
 
-  remoteWrite:
-    - url: https://metric-api.newrelic.com/prometheus/v1/write?prometheus_server=prometheus-cluster-1
-      # path is /etc/prometheus/secrets/<name_of_secret_from_below>/<key_of_secret>
-      bearerTokenFile: /etc/prometheus/secrets/prom-secret-files/relic_bearer_token
+  # remoteWrite:
+  #   - url: https://metric-api.newrelic.com/prometheus/v1/write?prometheus_server=prometheus-cluster-1
+  #     # path is /etc/prometheus/secrets/<name_of_secret_from_below>/<key_of_secret>
+  #     bearerTokenFile: /etc/prometheus/secrets/prom-secret-files/relic_bearer_token
 
   secrets:
     - prom-secret-files

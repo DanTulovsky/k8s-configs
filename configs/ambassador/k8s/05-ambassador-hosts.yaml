@@ -159,3 +159,18 @@ spec:
   hostname: n8n.wetsnow.com
   tlsSecret:
     name: n8n.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: locust.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  requestPolicy:
+    insecure:
+      action: Redirect
+  hostname: locust.wetsnow.com
+  tlsSecret:
+    name: locust.wetsnow.com
