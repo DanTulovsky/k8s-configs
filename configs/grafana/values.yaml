@@ -179,6 +179,10 @@ dashboards:
       gnetId: 11199
       revision: 1
       datasource: Prometheus
+    locust:
+      gnetId: 11985
+      revision: 1
+      datasource: Prometheus
 
 ## Grafana's primary configuration
 ## NOTE: values in map will be converted to ini format
