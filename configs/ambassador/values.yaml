@@ -20,11 +20,14 @@ service:
     service.beta.kubernetes.io/do-loadbalancer-protocol: "tcp"
   externalIPs: []
   ports:
-  - name: http
-    port: 80
-    targetPort: 8080
-  - name: https
-    port: 443
-    targetPort: 8443
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 8443
+    - name: minecraft
+      port: 25565
+      targetPort: 25565
   type: LoadBalancer
   externalTrafficPolicy: Local

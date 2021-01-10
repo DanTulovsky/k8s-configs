@@ -174,3 +174,18 @@ spec:
   hostname: locust.wetsnow.com
   tlsSecret:
     name: locust.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: minecraft.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  requestPolicy:
+    insecure:
+      action: Route
+  hostname: minecraft.wetsnow.com
+  tlsSecret:
+    name: minecraft.wetsnow.com
