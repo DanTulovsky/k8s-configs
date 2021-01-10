@@ -111,3 +111,5 @@ spec:
   host: locust.wetsnow.com
   resolver: endpoint
   service: locust-master.loadtest:8089
+  allow_upgrade:
+    - websocket
