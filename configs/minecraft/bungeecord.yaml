@@ -195,9 +195,9 @@ spec:
             - name: MEMORY
               value: 512m
             - name: JVM_OPTS
-              value:
+              value: ""
             - name: PLUGINS
-              value:
+              value: ""
           resources:
             requests:
               memory: 512Mi
