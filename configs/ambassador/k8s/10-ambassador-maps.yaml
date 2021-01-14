@@ -104,12 +104,12 @@ spec:
 apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
-  name: locust.wetsnow.com
+  name: predator.wetsnow.com
   namespace: ambassador
 spec:
   prefix: /
-  host: locust.wetsnow.com
+  host: predator.wetsnow.com
   resolver: endpoint
-  service: locust-master.loadtest:8089
+  service: predator.loadtest:8080
   allow_upgrade:
     - websocket

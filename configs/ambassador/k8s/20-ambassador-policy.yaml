@@ -6,7 +6,7 @@ metadata:
   namespace: ambassador
 spec:
   rules:
-    - host: "locust.wetsnow.com"
+    - host: "predator.wetsnow.com"
       # note that "/" only protects "/" and not "/foo"
       path: "*"
       filters:

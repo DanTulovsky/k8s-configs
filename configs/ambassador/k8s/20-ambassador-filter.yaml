@@ -11,7 +11,7 @@ spec:
     secretName: default-keycloak-secret
     # These are simply authorized_callbacks!
     protectedOrigins:
-      - origin: https://locust.wetsnow.com
+      - origin: https://predator.wetsnow.com
 
 ---
 apiVersion: getambassador.io/v2

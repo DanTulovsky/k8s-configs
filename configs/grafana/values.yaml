@@ -46,6 +46,7 @@ envFromSecret: "grafana-env-secret"
 plugins:
   - grafana-piechart-panel
   - grafana-worldmap-panel
+  - grafana-kubernetes-app
 
 ## Configure grafana datasources
 datasources:
@@ -150,6 +151,10 @@ dashboards:
       gnetId: 741
       revision: 1
       datasource: Prometheus
+    k8s-mon:
+      gnetId: 315
+      revision: 3
+      datasource: Prometheus
     postgres-overview:
       gnetId: 455
       revision: 2
@@ -179,9 +184,9 @@ dashboards:
       gnetId: 11199
       revision: 1
       datasource: Prometheus
-    locust:
-      gnetId: 11985
-      revision: 1
+    predator:
+      gnetId: 11651
+      revision: 2
       datasource: Prometheus
 
 ## Grafana's primary configuration

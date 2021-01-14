@@ -163,7 +163,7 @@ spec:
 apiVersion: getambassador.io/v2
 kind: Host
 metadata:
-  name: locust.wetsnow.com
+  name: predator.wetsnow.com
   namespace: ambassador
 spec:
   acmeProvider:
@@ -171,9 +171,9 @@ spec:
   requestPolicy:
     insecure:
       action: Redirect
-  hostname: locust.wetsnow.com
+  hostname: predator.wetsnow.com
   tlsSecret:
-    name: locust.wetsnow.com
+    name: predator.wetsnow.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
