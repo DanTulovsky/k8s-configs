@@ -7,3 +7,4 @@ spec:
   config:
     use_proxy_proto: true
     envoy_log_type: json
+    add_linkerd_headers: true

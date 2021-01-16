@@ -17,10 +17,10 @@ persistence:
 database:
   type: POSTGRES
   name: predator
-  address: postgresql-postgresql-ha-pgpool.db
+  address: postgresql-postgresql-ha-pgpool.default
   username: "cHJlZGF0b3I="
   password: INSECRET
 
 runnerDockerImage: zooz/predator-runner:1.5
-runnerCpu: 0.2
+runnerCpu: 0.1
 runnerMemory: 128

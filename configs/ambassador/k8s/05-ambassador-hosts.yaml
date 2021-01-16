@@ -189,3 +189,15 @@ spec:
   hostname: minecraft.wetsnow.com
   tlsSecret:
     name: minecraft.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: linkerd.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: linkerd.wetsnow.com
+  tlsSecret:
+    name: linkerd.wetsnow.com

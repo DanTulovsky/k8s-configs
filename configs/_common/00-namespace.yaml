@@ -1,29 +1,48 @@
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: default
+  annotations:
+    linkerd.io/inject: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: monitoring
+  annotations:
+    linkerd.io/inject: enabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: ambassador
+  annotations:
+    linkerd.io/inject: enabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: auth
+  annotations:
+    linkerd.io/inject: enabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: db
+  # annotations:
+  #   linkerd.io/inject: enabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: web
+  annotations:
+    linkerd.io/inject: enabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: argo-cd
+  name: loadtest
+  annotations:
+    linkerd.io/inject: enabled

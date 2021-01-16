@@ -113,3 +113,21 @@ spec:
   service: predator.loadtest:8080
   allow_upgrade:
     - websocket
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: linkerd.wetsnow.com
+  namespace: ambassador
+spec:
+  prefix: /
+  requestPolicy:
+    insecure:
+      action: Route
+  host: linkerd.wetsnow.com
+  resolver: endpoint
+  service: linkerd-web.linkerd:8084
+  host_rewrite: linkerd-web.linkerd.svc.cluster.local:8084
+  timeout_ms: 0 # required for grpc
+  allow_upgrade:
+    - websocket

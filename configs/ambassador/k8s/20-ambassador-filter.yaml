@@ -12,6 +12,7 @@ spec:
     # These are simply authorized_callbacks!
     protectedOrigins:
       - origin: https://predator.wetsnow.com
+      - origin: https://linkerd.wetsnow.com
 
 ---
 apiVersion: getambassador.io/v2
@@ -42,3 +43,5 @@ spec:
     # These are simply authorized_callbacks!
     protectedOrigins:
       - origin: https://n8n.wetsnow.com
+---
+

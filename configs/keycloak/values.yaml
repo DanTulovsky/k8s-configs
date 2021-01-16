@@ -23,14 +23,17 @@ cache:
 
 replicaCount: 2
 
+podAnnotations:
+  config.linkerd.io/skip-inbound-ports: "7600" # skip keycloak cluster discovery
+  config.linkerd.io/skip-outbound-ports: "7600"
+
 containerPorts:
   http: 8080
   https: 8443
 
-
 ## Keycloak containers' liveness and readiness probes.
 livenessProbe:
-  initialDelaySeconds: 600  # java is slow to startup
+  initialDelaySeconds: 600 # java is slow to startup
 
 service:
   type: ClusterIP
@@ -75,5 +78,6 @@ extraEnvVarsSecret: keycloak-db-secret
 
 externalDatabase:
   enabled: true
-  host: "postgresql-postgresql-ha-pgpool.db"
+  # host set in secret above
+  host: "postgresql-postgresql-ha-pgpool.default"
   # values in keycloak-db-secret

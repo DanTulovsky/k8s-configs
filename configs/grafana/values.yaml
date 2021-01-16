@@ -227,7 +227,7 @@ grafana.ini:
     role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
   database:
     type: postgres
-    host: postgresql-postgresql-ha-pgpool.db:5432
+    host: postgresql-postgresql-ha-pgpool.default:5432
     name: grafana
     user: grafana
     log_queries: true
