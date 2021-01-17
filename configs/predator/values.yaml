@@ -17,9 +17,9 @@ persistence:
 database:
   type: POSTGRES
   name: predator
-  address: postgresql-postgresql-ha-pgpool.default
+  address: pgsql-postgresql.db
   username: "cHJlZGF0b3I="
-  password: INSECRET
+  password: dGhpc3Bhc3N3b3Jk
 
 runnerDockerImage: zooz/predator-runner:1.5
 runnerCpu: 0.1

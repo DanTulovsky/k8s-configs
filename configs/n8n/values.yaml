@@ -16,7 +16,7 @@ config: # Dict with all n8n json config options
     #    connectionUrl:  # MongoDB Connection URL - default: mongodb://user:password@localhost:27017/database
     postgresdb:
       database: n8n # PostgresDB Database - default: n8n
-      host: postgresql-postgresql-ha-pgpool.default # PostgresDB Host - default: localhost
+      host: pgsql-postgresql.db # PostgresDB Host - default: localhost
       port: 5432 # PostgresDB Port - default: 5432
       user: n8n # PostgresDB User - default: root
       # schema: # PostgresDB Schema - default: public

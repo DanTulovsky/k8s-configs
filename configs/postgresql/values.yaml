@@ -9,11 +9,12 @@ postgresql:
   #   logDisconnections: true
   # repmgrLogLevel: DEBUG
 
-  # livenessProbe:
-  #   enabled: true
-  # readinessProbe:
-  #   enabled: true
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
   #   # initialDelaySeconds: 600
+  maxConnections: 10001
 
 pgpool:
   # enableLogConnections: true
@@ -27,3 +28,4 @@ metrics:
     namespace: monitoring
 # persistence:
 #   size: 8Gi
+

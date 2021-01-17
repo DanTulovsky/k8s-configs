@@ -159,6 +159,14 @@ dashboards:
       gnetId: 455
       revision: 2
       datasource: Prometheus
+    postgres-overview-2:
+      gnetId: 9628
+      revision: 6
+      datasource: Prometheus
+    postgres-overview-3:
+      gnetId: 10521
+      revision: 1
+      datasource: Prometheus
     prometheus-overview:
       gnetId: 3662
       revision: 2
@@ -227,7 +235,7 @@ grafana.ini:
     role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
   database:
     type: postgres
-    host: postgresql-postgresql-ha-pgpool.default:5432
+    host: pgsql-postgresql.db:5432
     name: grafana
     user: grafana
     log_queries: true

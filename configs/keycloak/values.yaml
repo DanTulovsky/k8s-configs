@@ -79,5 +79,5 @@ extraEnvVarsSecret: keycloak-db-secret
 externalDatabase:
   enabled: true
   # host set in secret above
-  host: "postgresql-postgresql-ha-pgpool.default"
+  host: "pgsql-postgresql.db"
   # values in keycloak-db-secret
