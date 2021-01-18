@@ -1,3 +1,14 @@
+image:
+  registry: ghcr.io
+  repository: dantulovsky/k8s-configs/nginx/nginx
+  tag: "v1.2.0"
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  debug: true
+
 cloneStaticSiteFromGit:
   enabled: true
   repository: https://github.com/DanTulovsky/wetsnow.com.git
@@ -19,6 +30,28 @@ metrics:
   selector:
     prometheus: prometheus
 
+extraVolumes:
+  - name: nginx-conf-volume
+    configMap:
+      name: nginx-conf
+      items:
+        - key: nginx.conf
+          path: nginx.conf
+  - name: jaeger-nginx-config
+    configMap:
+      name: jaeger-nginx-config
+      items:
+        - key: jaeger-nginx-config.json
+          path: jaeger-nginx-config.json
+
+extraVolumeMounts:
+  - name: nginx-conf-volume
+    mountPath: /opt/bitnami/nginx/conf/nginx.conf
+    subPath: nginx.conf
+  - name: jaeger-nginx-config
+    mountPath: /etc/jaeger-nginx-config.json
+    subPath: jaeger-nginx-config.json
+
 pdb:
   create: true
   minAvailable: 1
@@ -26,9 +59,9 @@ pdb:
 serverBlock: |-
   # access_log off;
   log_format json_analytics escape=json '{'
-                              '"msec": "$msec", ' # request unixtime in seconds with a milliseconds resolution
-                              '"connection": "$connection", ' # connection serial number
-                              '"connection_requests": "$connection_requests", ' # number of requests made in connection
+                      '"msec": "$msec", ' # request unixtime in seconds with a milliseconds resolution
+                      '"connection": "$connection", ' # connection serial number
+                      '"connection_requests": "$connection_requests", ' # number of requests made in connection
                       '"pid": "$pid", ' # process pid
                       '"request_id": "$request_id", ' # the unique request id
                       '"request_length": "$request_length", ' # request length (including headers and body)

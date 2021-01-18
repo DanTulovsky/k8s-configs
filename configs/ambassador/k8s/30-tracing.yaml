@@ -1,0 +1,14 @@
+---
+apiVersion: getambassador.io/v2
+kind: TracingService
+metadata:
+  name: tracing
+spec:
+  service: "linkerd-collector.linkerd:9411"
+  driver: zipkin
+  config: {}
+  tag_headers:
+    - ":authority"
+    - ":path"
+  sampling:
+    overall: 1
