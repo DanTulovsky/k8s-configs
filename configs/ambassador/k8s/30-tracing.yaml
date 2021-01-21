@@ -3,6 +3,7 @@ apiVersion: getambassador.io/v2
 kind: TracingService
 metadata:
   name: tracing
+  namespace: ambassador
 spec:
   service: "linkerd-collector.linkerd:9411"
   driver: zipkin

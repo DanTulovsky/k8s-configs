@@ -17,8 +17,10 @@ kind: Namespace
 metadata:
   name: ambassador
   annotations:
-    linkerd.io/inject: enabled
+    # enabling this causes ambassador to fail to log to linkerd
+    linkerd.io/inject: disabled
     config.linkerd.io/trace-collector: "linkerd-collector.linkerd:9411"
+    config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 ---
 apiVersion: v1
 kind: Namespace
@@ -26,6 +28,8 @@ metadata:
   name: auth
   annotations:
     linkerd.io/inject: enabled
+    config.linkerd.io/trace-collector: "linkerd-collector.linkerd:9411"
+    config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 ---
 apiVersion: v1
 kind: Namespace
@@ -41,6 +45,7 @@ metadata:
   annotations:
     linkerd.io/inject: enabled
     config.linkerd.io/trace-collector: "linkerd-collector.linkerd:9411"
+    config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 ---
 apiVersion: v1
 kind: Namespace
@@ -69,3 +74,12 @@ metadata:
   name: n8n
   annotations:
     linkerd.io/inject: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: poker
+  annotations:
+    linkerd.io/inject: enabled
+    config.linkerd.io/trace-collector: "linkerd-collector.linkerd:9411"
+    config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
