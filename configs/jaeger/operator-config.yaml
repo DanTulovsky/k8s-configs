@@ -1,0 +1,55 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+  namespace: observability
+spec:
+  strategy: allInOne
+  allInOne:
+    image: jaegertracing/all-in-one:latest
+    options:
+      # https://www.jaegertracing.io/docs/1.21/cli/
+      log-level: debug
+      query.max-clock-skew-adjustment: "0s"
+      collector.zipkin.host-port: ":9411"
+  # only used when services query jaeger for sampling strategy to use
+  sampling:
+    options:
+      service_strategies:
+        - service: "ambassador-ambassador"
+          type: "ratelimiting"
+          param: 5 # qps
+        - service: "nginx"
+          type: "ratelimiting"
+          param: 1 # qps
+        - service: "pepper-poker"
+          type: "probabilistic"
+          param: 0.01 # 1%
+          operation_strategies:
+            - operation: "/"
+              type: "probabilistic"
+              param: 1 # 100%
+      default_strategy:
+        type: probabilistic
+        param: 0.01 # 1%
+        operation_strategies:
+          - operation: "/grpc.health.v1.Health/Check"
+            type: "probabilistic"
+            param: 0.0
+          - operation: "/health"
+            type: "probabilistic"
+            param: 0.0
+          - operation: "/metrics"
+            type: "probabilistic"
+            param: 0.0
+  storage:
+    type: memory
+    options:
+      memory:
+        max-traces: 100000
+  ingress:
+    enabled: false
+  # agent:
+  #   strategy: DaemonSet
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""

@@ -201,3 +201,15 @@ spec:
   hostname: linkerd.wetsnow.com
   tlsSecret:
     name: linkerd.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: jaeger.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: jaeger.wetsnow.com
+  tlsSecret:
+    name: jaeger.wetsnow.com

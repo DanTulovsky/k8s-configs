@@ -5,11 +5,11 @@ metadata:
   name: tracing
   namespace: ambassador
 spec:
-  service: "linkerd-collector.linkerd:9411"
+  service: "jaeger-collector.observability:9411"
   driver: zipkin
   config: {}
   tag_headers:
     - ":authority"
     - ":path"
   sampling:
-    overall: 1
+    overall: 1 # 100%

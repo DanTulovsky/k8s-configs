@@ -3,6 +3,12 @@ replicas: 2
 podDisruptionBudget:
   minAvailable: 1
 
+image:
+  pullPolicy: IfNotPresent
+  repository: grafana/grafana
+  sha: ""
+  tag: 7.4.0-beta1
+
 service:
   type: ClusterIP
   port: 80
@@ -61,6 +67,11 @@ datasources:
         url: http://kube-prometheus-prometheus:9090
         access: proxy
         isDefault: true
+      - name: Loki
+        type: Loki
+        url: http://loki:3100
+        access: proxy
+        isDefault: false
 
 ## Configure notifiers
 notifiers:
@@ -195,6 +206,10 @@ dashboards:
     predator:
       gnetId: 11651
       revision: 2
+      datasource: Prometheus
+    jaeger:
+      gnetId: 12535
+      revision: 1
       datasource: Prometheus
 
 ## Grafana's primary configuration

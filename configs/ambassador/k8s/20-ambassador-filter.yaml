@@ -13,6 +13,7 @@ spec:
     protectedOrigins:
       - origin: https://predator.wetsnow.com
       - origin: https://linkerd.wetsnow.com
+      - origin: https://jaeger.wetsnow.com
 
 ---
 apiVersion: getambassador.io/v2

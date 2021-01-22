@@ -128,3 +128,21 @@ spec:
   timeout_ms: 0 # required for grpc
   allow_upgrade:
     - websocket
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: jaeger.wetsnow.com
+  namespace: ambassador
+spec:
+  prefix: /
+  requestPolicy:
+    insecure:
+      action: Route
+  host: jaeger.wetsnow.com
+  resolver: endpoint
+  service: jaeger-query.observability:16686
+  # host_rewrite: linkerd-web.linkerd.svc.cluster.local:8084
+  # timeout_ms: 0 # required for grpc
+  allow_upgrade:
+    - websocket

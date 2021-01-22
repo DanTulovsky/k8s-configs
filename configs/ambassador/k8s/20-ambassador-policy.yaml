@@ -28,6 +28,17 @@ spec:
               - "email"
               - "profile"
               - "default"
+    - host: "jaeger.wetsnow.com"
+      # note that "/" only protects "/" and not "/foo"
+      path: "*"
+      filters:
+        - name: keycloak-default-filter ## Enter the Filter name from above
+          arguments:
+            scope:
+              # required scopes
+              - "email"
+              - "profile"
+              - "default"
 ---
 apiVersion: getambassador.io/v2
 kind: FilterPolicy

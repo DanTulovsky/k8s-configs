@@ -1,4 +1,2 @@
 tracing:
-  enabled: true
-  env:
-    QUERY_MAX_CLOCK_SKEW_ADJUSTMENT: "0s"
+  enabled: false
