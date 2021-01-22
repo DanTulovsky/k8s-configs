@@ -9,7 +9,7 @@ data:
       "service_name": "nginx",
       "sampler": {
         "type": "const",
-        "param": 1
+        "param": 1,
         "samplingServerURL": "http://jaeger-agent.observability:5778/sampling"
       },
       "reporter": {
