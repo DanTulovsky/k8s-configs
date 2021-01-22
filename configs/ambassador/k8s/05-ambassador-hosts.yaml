@@ -213,3 +213,15 @@ spec:
   hostname: jaeger.wetsnow.com
   tlsSecret:
     name: jaeger.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: prometheus.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: prometheus.wetsnow.com
+  tlsSecret:
+    name: prometheus.wetsnow.com
