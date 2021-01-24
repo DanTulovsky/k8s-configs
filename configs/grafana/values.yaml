@@ -211,6 +211,10 @@ dashboards:
       gnetId: 12535
       revision: 1
       datasource: Prometheus
+    otel-collector:
+      gnetId: 12553
+      revision: 1
+      datasource: Prometheus
 
 ## Grafana's primary configuration
 ## NOTE: values in map will be converted to ini format

@@ -19,6 +19,7 @@ metadata:
   annotations:
     # enabling this causes ambassador to fail to log to linkerd
     linkerd.io/inject: disabled
+    # this must be an opencensus collector
     # config.linkerd.io/trace-collector: "linkerd-collector.linkerd:56678"
     # config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 ---
@@ -45,8 +46,8 @@ metadata:
   name: web
   annotations:
     linkerd.io/inject: enabled
-    # config.linkerd.io/trace-collector: "linkerd-collector.linkerd:56678"
-    # config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
+    config.linkerd.io/trace-collector: "otel-collector.observability:55680"
+    # config.alpha.linkerd.io/trace-collector-service-account: default.observability
 ---
 apiVersion: v1
 kind: Namespace
@@ -82,8 +83,8 @@ metadata:
   name: poker
   annotations:
     linkerd.io/inject: enabled
-    # config.linkerd.io/trace-collector: "linkerd-collector.linkerd:9411"
-    # config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
+    config.linkerd.io/trace-collector: "otel-collector.observability:55680"
+    # config.alpha.linkerd.io/trace-collector-service-account: default.observability
 ---
 apiVersion: v1
 kind: Namespace
@@ -91,3 +92,5 @@ metadata:
   name: observability
   annotations:
     linkerd.io/inject: enabled
+    config.linkerd.io/trace-collector: "otel-collector.observability:55680"
+    # config.alpha.linkerd.io/trace-collector-service-account: default.observability

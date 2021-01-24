@@ -2,7 +2,35 @@
 apiVersion: getambassador.io/v2
 kind: Filter
 metadata:
-  name: keycloak-default-filter
+  name: keycloak-linkerd-filter
+  namespace: ambassador
+spec:
+  OAuth2:
+    authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
+    clientID: default.wetsnow.com
+    secretName: default-keycloak-secret
+    # These are simply authorized_callbacks!
+    protectedOrigins:
+      - origin: https://linkerd.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Filter
+metadata:
+  name: keycloak-jaeger-filter
+  namespace: ambassador
+spec:
+  OAuth2:
+    authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
+    clientID: default.wetsnow.com
+    secretName: default-keycloak-secret
+    # These are simply authorized_callbacks!
+    protectedOrigins:
+      - origin: https://jaeger.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Filter
+metadata:
+  name: keycloak-predator-filter
   namespace: ambassador
 spec:
   OAuth2:
@@ -12,10 +40,20 @@ spec:
     # These are simply authorized_callbacks!
     protectedOrigins:
       - origin: https://predator.wetsnow.com
-      - origin: https://linkerd.wetsnow.com
-      - origin: https://jaeger.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Filter
+metadata:
+  name: keycloak-prometheus-filter
+  namespace: ambassador
+spec:
+  OAuth2:
+    authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
+    clientID: default.wetsnow.com
+    secretName: default-keycloak-secret
+    # These are simply authorized_callbacks!
+    protectedOrigins:
       - origin: https://prometheus.wetsnow.com
-
 ---
 apiVersion: getambassador.io/v2
 kind: Filter

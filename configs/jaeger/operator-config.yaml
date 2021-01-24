@@ -4,7 +4,8 @@ metadata:
   name: jaeger
   namespace: observability
 spec:
-  strategy: allInOne
+  # strategy: allInOne
+  strategy: production
   allInOne:
     image: jaegertracing/all-in-one:latest
     options:
@@ -12,6 +13,29 @@ spec:
       log-level: debug
       query.max-clock-skew-adjustment: "0s"
       collector.zipkin.host-port: ":9411"
+  # collector:
+  #   image: jaegertracing/jaeger-opentelemetry-collector:latest # <1>
+  #   Replicas: 1
+  #   MaxReplicas: 1
+  #   Autoscale: false
+  #   config:
+  #     extensions:
+  #       health_check:
+  #         port: 14269
+  # storage:
+  #   type: cassandra
+  #   options:
+  #     cassandra:
+  #       servers: cassandra.db
+  #       keyspace: jaeger_v1_ns0
+  #   cassandraCreateSchema:
+  #     datacenter: "ns0"
+  #     mode: "test"
+  storage:
+    type: memory
+    options:
+      memory:
+        max-traces: 100000
   # only used when services query jaeger for sampling strategy to use
   sampling:
     options:
@@ -22,6 +46,10 @@ spec:
         - service: "nginx"
           type: "ratelimiting"
           param: 1 # qps
+          operation_strategies:
+            - operation: "/status"
+              type: "probabilistic"
+              param: 0.0
         - service: "pepper-poker"
           type: "probabilistic"
           param: 0.01 # 1%
@@ -42,11 +70,6 @@ spec:
           - operation: "/metrics"
             type: "probabilistic"
             param: 0.0
-  storage:
-    type: memory
-    options:
-      memory:
-        max-traces: 100000
   ingress:
     enabled: false
   # agent:
