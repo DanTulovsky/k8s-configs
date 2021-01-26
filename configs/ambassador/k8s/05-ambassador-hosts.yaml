@@ -225,3 +225,15 @@ spec:
   hostname: prometheus.wetsnow.com
   tlsSecret:
     name: prometheus.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: pgadmin.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: pgadmin.wetsnow.com
+  tlsSecret:
+    name: pgadmin.wetsnow.com

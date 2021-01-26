@@ -87,6 +87,8 @@ extraEnvVars:
     value: "keycloak"
   - name: JAEGER_ENDPOINT
     value: "http://linkerd-collector.linkerd:14268/api/traces"
+  - name: KEYCLOAK_STATISTICS
+    value: ""
 
 externalDatabase:
   enabled: true

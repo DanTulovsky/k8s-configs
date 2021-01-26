@@ -151,3 +151,16 @@ spec:
   service: kube-prometheus-prometheus.monitoring:9090
   allow_upgrade:
     - websocket
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: pgadmin.wetsnow.com
+  namespace: ambassador
+spec:
+  prefix: /
+  host: pgadmin.wetsnow.com
+  resolver: endpoint
+  service: pgadmin4.db:80
+  allow_upgrade:
+    - websocket

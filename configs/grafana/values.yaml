@@ -59,7 +59,7 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     # deleteDatasources:
-    #   - name: PrometheusLocal
+    #   - name: Loki
     #     orgId: 1
     datasources:
       - name: Prometheus
@@ -67,11 +67,11 @@ datasources:
         url: http://kube-prometheus-prometheus:9090
         access: proxy
         isDefault: true
-      - name: Loki
-        type: Loki
-        url: http://loki:3100
-        access: proxy
-        isDefault: false
+      # - name: Loki
+      #   type: loki
+      #   url: http://loki:3100
+      #   access: proxy
+      #   isDefault: false
 
 ## Configure notifiers
 notifiers:
@@ -240,6 +240,7 @@ grafana.ini:
   server:
     # The full public facing url you use in browser, used for redirects and emails
     root_url: https://grafana.wetsnow.com
+    enable_gzip: true
   auth:
     oauth_auto_login: false
     signout_redirect_url: "https://login.wetsnow.com/auth/realms/wetsnow/protocol/openid-connect/logout?redirect_uri=https%3A%2F%2Flogin.wetsnow.com%2Fauth%2Frealms%2Fwetsnow%2Faccount%2F%23%2F"
@@ -252,13 +253,31 @@ grafana.ini:
     api_url: "https://login.wetsnow.com/auth/realms/wetsnow/protocol/openid-connect/userinfo"
     scopes: email profile
     role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+  remote_cache:
+    type: "database"
   database:
     type: postgres
     host: pgsql-postgresql.db:5432
     name: grafana
     user: grafana
-    log_queries: true
+    log_queries: false
     ssl_mode: disable
+    conn_max_lifetime: 2000
+  tracing.jaeger:
+    address: jaeger-agent.observability:6831
+    sampler_type: const
+    sampler_param: 1
+    sampling_server_url: http://jaeger-agent.observability:5778/sampling
+    zipkin_propagation: true
+  dataproxy:
+    expect_continue_timeout_seconds: 5
+    logging: true
+
+env:
+  # JAEGER_AGENT_HOST: "jaeger-agent.observability"
+  JAEGER_AGENT_HOST: jaeger-agent.observability
+  JAEGER_AGENT_PORT: 6831
+  JAEGER_SERVICE_NAME: grafana
 
 ## Grafana's SMTP configuration
 ## NOTE: To enable, grafana.ini must be configured with smtp.enabled
