@@ -53,6 +53,7 @@ plugins:
   - grafana-piechart-panel
   - grafana-worldmap-panel
   - grafana-kubernetes-app
+  - https://github.com/lightstep/lightstep-grafana-plugin/archive/master.zip;lightstep-grafana-plugin
 
 ## Configure grafana datasources
 datasources:
@@ -270,7 +271,7 @@ grafana.ini:
     sampling_server_url: http://jaeger-agent.observability:5778/sampling
     zipkin_propagation: true
   dataproxy:
-    expect_continue_timeout_seconds: 5
+    expect_continue_timeout_seconds: 10
     logging: true
 
 env:

@@ -3,14 +3,14 @@ kind: Namespace
 metadata:
   name: default
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: monitoring
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
@@ -28,7 +28,7 @@ kind: Namespace
 metadata:
   name: auth
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
     # this must be an opencensus collector
     # config.linkerd.io/trace-collector: "linkerd-collector.linkerd:56678"
     # config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
@@ -38,14 +38,14 @@ kind: Namespace
 metadata:
   name: db
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: web
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
     config.linkerd.io/trace-collector: "otel-collector.observability:55680"
     # config.alpha.linkerd.io/trace-collector-service-account: default.observability
 ---
@@ -54,35 +54,35 @@ kind: Namespace
 metadata:
   name: loadtest
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: poker
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: minecraft
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: n8n
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: poker
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
     config.linkerd.io/trace-collector: "otel-collector.observability:55680"
     # config.alpha.linkerd.io/trace-collector-service-account: default.observability
 ---
@@ -91,6 +91,6 @@ kind: Namespace
 metadata:
   name: observability
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled
     config.linkerd.io/trace-collector: "otel-collector.observability:55680"
     # config.alpha.linkerd.io/trace-collector-service-account: default.observability

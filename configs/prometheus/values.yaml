@@ -27,6 +27,24 @@ prometheus:
     enabled: true
     size: 64G
 
+  volumes:
+    - name: lightstep-config-volume
+      secret:
+        secretName: lightstep-config
+
+  containers:
+    - name: otel-sidecar
+      image: lightstep/opentelemetry-prometheus-sidecar
+      imagePullPolicy: Always
+      args:
+        - --config-file=/etc/lightstep/config.yaml
+      volumeMounts:
+        - name: prometheus-kube-prometheus-prometheus-db
+          mountPath: /prometheus
+          subPath: prometheus-db
+        - name: lightstep-config-volume
+          mountPath: /etc/lightstep
+
 alertmanager:
   service:
     type: ClusterIP
