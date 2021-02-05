@@ -1,50 +1,5 @@
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: otel-collector-conf
-  namespace: observability
-  labels:
-    app: opentelemetry
-    component: otel-collector-conf
-data:
-  otel-collector-config: |
-    receivers:
-      otlp:
-        protocols:
-          grpc:
-          http:
-      jaeger:
-        protocols:
-          grpc:
-          thrift_http:
-      zipkin: {}
-    processors:
-      batch:
-      memory_limiter:
-        # Same as --mem-ballast-size-mib CLI argument
-        ballast_size_mib: 683
-        # 80% of maximum memory up to 2G
-        limit_mib: 1500
-        # 25% of limit up to 2G
-        spike_limit_mib: 512
-        check_interval: 5s
-    extensions:
-      health_check: {}
-      zpages: {}
-    exporters:
-      jaeger_thrift:
-        url: "http://jaeger-collector.observability:14268/api/traces"
-      logging:
-        loglevel: info
-    service:
-      extensions: [health_check, zpages]
-      pipelines:
-        traces/1:
-          receivers: [otlp, zipkin, jaeger]
-          processors: [memory_limiter, batch]
-          exporters: [logging, jaeger_thrift]
----
+# otel-config in configMap (1password)
 apiVersion: v1
 kind: Service
 metadata:
@@ -68,6 +23,12 @@ spec:
       port: 9411
     - name: metrics # Default endpoint for querying metrics.
       port: 8888
+    - name: thrift-binary
+      port: 6832
+      protocol: UDP
+    - name: thrift-compact
+      port: 6831
+      protocol: UDP
   selector:
     component: otel-collector
 ---
@@ -121,6 +82,12 @@ spec:
               name: zpikin
             - containerPort: 8888 # Default endpoint for querying metrics.
               name: metrics
+            - containerPort: 6832
+              name: thrift-binary
+              protocol: UDP
+            - containerPort: 6831
+              name: thrift-compact
+              protocol: UDP
 
           volumeMounts:
             - name: otel-collector-config-vol
@@ -142,13 +109,6 @@ spec:
               - key: otel-collector-config
                 path: otel-collector-config.yaml
           name: otel-collector-config-vol
-#        - secret:
-#            name: otel-collector-secrets
-#            items:
-#              - key: cert.pem
-#                path: cert.pem
-#              - key: key.pem
-#                path: key.pem
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

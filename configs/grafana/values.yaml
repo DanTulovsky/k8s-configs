@@ -265,7 +265,8 @@ grafana.ini:
     ssl_mode: disable
     conn_max_lifetime: 2000
   tracing.jaeger:
-    address: jaeger-agent.observability:6831
+    # env used below
+    address: otel-collector.observability:6831
     sampler_type: const
     sampler_param: 1
     sampling_server_url: http://jaeger-agent.observability:5778/sampling
@@ -276,7 +277,7 @@ grafana.ini:
 
 env:
   # JAEGER_AGENT_HOST: "jaeger-agent.observability"
-  JAEGER_AGENT_HOST: jaeger-agent.observability
+  JAEGER_AGENT_HOST: otel-collector.observability
   JAEGER_AGENT_PORT: 6831
   JAEGER_SERVICE_NAME: grafana
 
