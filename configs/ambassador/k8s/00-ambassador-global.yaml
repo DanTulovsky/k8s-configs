@@ -7,4 +7,11 @@ spec:
   config:
     use_proxy_proto: true
     envoy_log_type: json
-    add_linkerd_headers: true
+    add_linkerd_headers: false
+    diagnostics:
+      enabled: false
+---
+apiVersion: getambassador.io/v2
+kind: KubernetesEndpointResolver
+metadata:
+  name: endpoint

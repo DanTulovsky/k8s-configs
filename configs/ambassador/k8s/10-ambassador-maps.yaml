@@ -1,7 +1,13 @@
+---
 apiVersion: getambassador.io/v2
-kind: KubernetesEndpointResolver
+kind: Mapping
 metadata:
-  name: endpoint
+  name: admin-mapping
+spec:
+  host: ambassador-admin.wetsnow.com
+  prefix: /edge_stack/
+  rewrite: /edge_stack_ui/edge_stack/
+  service: localhost:8500
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -12,13 +18,14 @@ spec:
   prefix: /poker.PokerServer/
   rewrite: /poker.PokerServer/
   service: https://pepper-poker-grpc-service.poker:8443
-  timeout_ms: 0 # required for grpc
+  timeout_ms: 0 # required for steaming grpc
   grpc: True
   headers:
     :authority: pepper-poker-grpc.wetsnow.com
   resolver: endpoint
   load_balancer:
     policy: least_request
+  host: "pepper-poker-grpc.wetsnow.com"
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -35,6 +42,7 @@ spec:
   resolver: endpoint
   load_balancer:
     policy: least_request
+  host: "pepper-poker-grpc.wetsnow.com"
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -84,20 +92,20 @@ spec:
   host: www.wetsnow.com
   resolver: endpoint
   service: nginx.web:80
----
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: n8n.wetsnow.com
-  namespace: ambassador
-spec:
-  prefix: /
-  host: n8n.wetsnow.com
-  resolver: endpoint
-  service: n8n.n8n:80
-  timeout_ms: 0 # required for grpc
-  allow_upgrade:
-    - websocket
+# ---
+# apiVersion: getambassador.io/v2
+# kind: Mapping
+# metadata:
+#   name: n8n.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   prefix: /
+#   host: n8n.wetsnow.com
+#   resolver: endpoint
+#   service: n8n.n8n:80
+#   timeout_ms: 0 # required for grpc
+#   allow_upgrade:
+#     - websocket
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -112,21 +120,21 @@ spec:
   allow_upgrade:
     - websocket
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: linkerd.wetsnow.com
-  namespace: ambassador
-spec:
-  prefix: /
-  host: linkerd.wetsnow.com
-  resolver: endpoint
-  service: linkerd-web.linkerd:8084
-  host_rewrite: linkerd-web.linkerd.svc.cluster.local:8084
-  timeout_ms: 0 # required for grpc
-  allow_upgrade:
-    - websocket
----
+# apiVersion: getambassador.io/v2
+# kind: Mapping
+# metadata:
+#   name: linkerd.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   prefix: /
+#   host: linkerd.wetsnow.com
+#   resolver: endpoint
+#   service: linkerd-web.linkerd:8084
+#   host_rewrite: linkerd-web.linkerd.svc.cluster.local:8084
+#   timeout_ms: 0 # required for grpc
+#   allow_upgrade:
+#     - websocket
+# ---
 apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
@@ -165,3 +173,12 @@ spec:
   service: pgadmin4.db:80
   allow_upgrade:
     - websocket
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: "404-fallback"
+spec:
+  prefix: "/"
+  rewrite: "/404/" # This must not map to any existing prefix!
+  service: localhost:8500

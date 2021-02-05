@@ -144,21 +144,21 @@ spec:
 #     - "wetsnow.com"
 #   secret: www.wetsnow.com
 #   alpn_protocols: h2,http/1.1 # required for C# grpc client
----
-apiVersion: getambassador.io/v2
-kind: Host
-metadata:
-  name: n8n.wetsnow.com
-  namespace: ambassador
-spec:
-  acmeProvider:
-    email: dant@wetsnow.com
-  requestPolicy:
-    insecure:
-      action: Redirect
-  hostname: n8n.wetsnow.com
-  tlsSecret:
-    name: n8n.wetsnow.com
+# ---
+# apiVersion: getambassador.io/v2
+# kind: Host
+# metadata:
+#   name: n8n.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   acmeProvider:
+#     email: dant@wetsnow.com
+#   requestPolicy:
+#     insecure:
+#       action: Redirect
+#   hostname: n8n.wetsnow.com
+#   tlsSecret:
+#     name: n8n.wetsnow.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -189,18 +189,18 @@ spec:
   hostname: minecraft.wetsnow.com
   tlsSecret:
     name: minecraft.wetsnow.com
----
-apiVersion: getambassador.io/v2
-kind: Host
-metadata:
-  name: linkerd.wetsnow.com
-  namespace: ambassador
-spec:
-  acmeProvider:
-    email: dant@wetsnow.com
-  hostname: linkerd.wetsnow.com
-  tlsSecret:
-    name: linkerd.wetsnow.com
+# ---
+# apiVersion: getambassador.io/v2
+# kind: Host
+# metadata:
+#   name: linkerd.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   acmeProvider:
+#     email: dant@wetsnow.com
+#   hostname: linkerd.wetsnow.com
+#   tlsSecret:
+#     name: linkerd.wetsnow.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -237,3 +237,15 @@ spec:
   hostname: pgadmin.wetsnow.com
   tlsSecret:
     name: pgadmin.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: ambassador-admin.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: ambassador-admin.wetsnow.com
+  tlsSecret:
+    name: ambassador-admin.wetsnow.com
