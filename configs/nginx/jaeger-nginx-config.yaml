@@ -10,11 +10,11 @@ data:
       "sampler": {
         "type": "remote",
         # "param": 0.1,
-        "samplingServerURL": "http://jaeger-agent.observability:5778/sampling"
+        # "samplingServerURL": "http://jaeger-agent.observability:5778/sampling"
+        "samplingServerURL": "http://otel-collector.observability:5778/sampling"
       },
       "reporter": {
         "logSpans": true,
-        # "localAgentHostPort": "jaeger-agent.observability:6831"
         "localAgentHostPort": "otel-collector.observability:6831"
       },
       "headers": {

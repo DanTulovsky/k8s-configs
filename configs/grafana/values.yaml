@@ -269,7 +269,7 @@ grafana.ini:
     address: otel-collector.observability:6831
     sampler_type: const
     sampler_param: 1
-    sampling_server_url: http://jaeger-agent.observability:5778/sampling
+    sampling_server_url: http://otel-collctor.observability:5778/sampling
     zipkin_propagation: true
   dataproxy:
     expect_continue_timeout_seconds: 10
