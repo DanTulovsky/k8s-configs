@@ -91,7 +91,7 @@ spec:
   prefix: /
   host: www.wetsnow.com
   resolver: endpoint
-  service: nginx.web:80
+  service: static-web-frontend.web:8080
 # ---
 # apiVersion: getambassador.io/v2
 # kind: Mapping

@@ -54,6 +54,15 @@ RUN cd opentracing-cpp \
 #     && cd "$tempDir" \
 #     && ln -s /usr/local/lib/libzipkin_opentracing.so /usr/local/lib/libzipkin_opentracing_plugin.so
 
+### Build lightstep-tracer-cpp
+# RUN git clone -b $LIGHTSTEP_VERSION https://github.com/lightstep/lightstep-tracer-cpp.git \
+#     && cd lightstep-tracer-cpp \
+#     && mkdir .build && cd .build \
+#     && cmake -DBUILD_SHARED_LIBS=1 -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. \
+#     && make && make install \
+#     && cd "$tempDir" \
+#     && ln -s /usr/local/lib/liblightstep_tracer.so /usr/local/lib/liblightstep_tracer_plugin.so
+
 ### Build Jaeger cpp-client
 RUN git clone -b $JAEGER_CPP_VERSION https://github.com/jaegertracing/cpp-client.git jaeger-cpp-client
 RUN cd jaeger-cpp-client \
@@ -92,7 +101,7 @@ RUN install_packages protobuf-compiler-grpc iputils-ping curl protobuf-compiler 
 RUN mkdir -p /usr/local/lib/
 RUN chmod -R a+rx /usr/local/
 
-# Install ngx_http_perl_module files
+# Install module files
 COPY --from=builder /opt/bitnami/nginx/modules/ngx_http_opentracing_module.so /opt/bitnami/nginx/modules/ngx_http_opentracing_module.so
 COPY --from=builder /usr/local/lib/libopentracing.so.1.6.0 /usr/local/lib/libopentracing.so.1.6.0
 RUN ln -s /usr/local/lib/libopentracing.so.1.6.0 /usr/lib/libopentracing.so.1
