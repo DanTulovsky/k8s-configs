@@ -25,8 +25,10 @@ spec:
     options:
       service_strategies:
         - service: "ambassador-ambassador"
-          type: "ratelimiting"
-          param: 5 # qps
+          # type: "ratelimiting"
+          # param: 5 # qps
+          type: "probabilistic"
+          param: 1
         - service: "nginx"
           type: "ratelimiting"
           param: 1 # qps
@@ -36,11 +38,7 @@ spec:
               param: 0.0
         - service: "pepper-poker"
           type: "probabilistic"
-          param: 0.01 # 1%
-          operation_strategies:
-            - operation: "/"
-              type: "probabilistic"
-              param: 1 # 100%
+          param: 1 # 100%
         - service: "web-static"
           type: "probabilistic"
           param: 0.01 # 1%
