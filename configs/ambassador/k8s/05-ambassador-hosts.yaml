@@ -133,6 +133,21 @@ spec:
   hostname: www.wetsnow.com
   tlsSecret:
     name: www.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: www.dusselskolk.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  requestPolicy:
+    insecure:
+      action: Redirect
+  hostname: www.dusselskolk.com
+  tlsSecret:
+    name: www.dusselskolk.com
 # ---
 # apiVersion: getambassador.io/v2
 # kind: TLSContext

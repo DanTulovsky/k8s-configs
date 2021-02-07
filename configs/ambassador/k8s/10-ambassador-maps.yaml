@@ -85,11 +85,32 @@ spec:
 apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
+  name: redirect
+spec:
+  prefix: /
+  host: wetsnow.com
+  service: www.wetsnow.com
+  host_redirect: true
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
   name: wetsnow.com
   namespace: ambassador
 spec:
   prefix: /
   host: www.wetsnow.com
+  resolver: endpoint
+  service: static-web-frontend.web:8080
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: dusselskolk.com
+  namespace: ambassador
+spec:
+  prefix: /
+  host: www.dusselskolk.com
   resolver: endpoint
   service: static-web-frontend.web:8080
 # ---
