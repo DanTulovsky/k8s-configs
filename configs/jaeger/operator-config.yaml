@@ -43,8 +43,7 @@ spec:
               param: 1 # 100%
         - service: "web-static"
           type: "probabilistic"
-          # param: 0.01 # 1%
-          param: 1 # 100%
+          param: 0.01 # 1%
           operation_strategies:
             - operation: "/"
               type: "probabilistic"

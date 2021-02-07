@@ -1,6 +1,12 @@
 config:
   lokiAddress: http://loki:3100/loki/api/v1/push
 
+serviceMonitor:
+  enabled: true
+  namespace: monitoring
+  label:
+    app.kubernetes.io/name: promtail
+
 extraScrapeConfigs:
   - job_name: syslog
     syslog:
@@ -40,3 +46,7 @@ extraVolumeMounts:
 
 extraCommandlineArgs:
   - -log-config-reverse-order
+
+podLabels:
+  app: promtail
+  release: promtail
