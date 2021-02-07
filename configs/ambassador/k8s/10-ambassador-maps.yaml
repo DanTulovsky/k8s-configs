@@ -3,6 +3,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: admin-mapping
+  namespace: ambassador
 spec:
   host: ambassador-admin.wetsnow.com
   prefix: /edge_stack/
@@ -85,17 +86,18 @@ spec:
 apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
-  name: redirect
+  name: wetsnow.com
+  namespace: ambassador
 spec:
   prefix: /
   host: wetsnow.com
-  service: www.wetsnow.com
-  host_redirect: true
+  resolver: endpoint
+  service: static-web-frontend.web:8080
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
-  name: wetsnow.com
+  name: www.wetsnow.com
   namespace: ambassador
 spec:
   prefix: /
@@ -106,11 +108,22 @@ spec:
 apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
-  name: dusselskolk.com
+  name: www.dusselskolk.com
   namespace: ambassador
 spec:
   prefix: /
   host: www.dusselskolk.com
+  resolver: endpoint
+  service: static-web-frontend.web:8080
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: dusselskolk.com
+  namespace: ambassador
+spec:
+  prefix: /
+  host: dusselskolk.com
   resolver: endpoint
   service: static-web-frontend.web:8080
 # ---
@@ -199,6 +212,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: "404-fallback"
+  namespace: ambassador
 spec:
   prefix: "/"
   rewrite: "/404/" # This must not map to any existing prefix!
