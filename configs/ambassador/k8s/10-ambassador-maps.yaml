@@ -19,7 +19,9 @@ spec:
   prefix: /poker.PokerServer/
   rewrite: /poker.PokerServer/
   service: https://pepper-poker-grpc-service.poker:8443
-  timeout_ms: 0 # required for steaming grpc
+  # https://github.com/datawire/ambassador/issues/3154
+  timeout_ms: 3600000 # required for steaming grpc; 1 hr; 0 is broken!
+  connect_timeout_ms: 5000
   grpc: True
   headers:
     :authority: pepper-poker-grpc.wetsnow.com

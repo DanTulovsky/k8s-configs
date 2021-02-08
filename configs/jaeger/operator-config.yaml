@@ -25,20 +25,12 @@ spec:
     options:
       service_strategies:
         - service: "ambassador-ambassador"
-          # type: "ratelimiting"
-          # param: 5 # qps
-          type: "probabilistic"
-          param: 1
-        - service: "nginx"
+          # ambassador doesn't use this, configured in 30-tracing.yaml
           type: "ratelimiting"
-          param: 1 # qps
-          operation_strategies:
-            - operation: "/status"
-              type: "probabilistic"
-              param: 0.0
+          param: 5 # qps
         - service: "pepper-poker"
           type: "probabilistic"
-          param: 1 # 100%
+          param: 0.10 # 10%
         - service: "web-static"
           type: "probabilistic"
           param: 0.01 # 1%
