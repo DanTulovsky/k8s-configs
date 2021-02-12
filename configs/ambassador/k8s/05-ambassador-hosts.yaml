@@ -226,36 +226,36 @@ spec:
 #   hostname: n8n.wetsnow.com
 #   tlsSecret:
 #     name: n8n.wetsnow.com
----
-apiVersion: getambassador.io/v2
-kind: Host
-metadata:
-  name: predator.wetsnow.com
-  namespace: ambassador
-spec:
-  acmeProvider:
-    email: dant@wetsnow.com
-  requestPolicy:
-    insecure:
-      action: Redirect
-  hostname: predator.wetsnow.com
-  tlsSecret:
-    name: predator.wetsnow.com
----
-apiVersion: getambassador.io/v2
-kind: Host
-metadata:
-  name: minecraft.wetsnow.com
-  namespace: ambassador
-spec:
-  acmeProvider:
-    email: dant@wetsnow.com
-  requestPolicy:
-    insecure:
-      action: Route
-  hostname: minecraft.wetsnow.com
-  tlsSecret:
-    name: minecraft.wetsnow.com
+# ---
+# apiVersion: getambassador.io/v2
+# kind: Host
+# metadata:
+#   name: predator.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   acmeProvider:
+#     email: dant@wetsnow.com
+#   requestPolicy:
+#     insecure:
+#       action: Redirect
+#   hostname: predator.wetsnow.com
+#   tlsSecret:
+#     name: predator.wetsnow.com
+# ---
+# apiVersion: getambassador.io/v2
+# kind: Host
+# metadata:
+#   name: minecraft.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   acmeProvider:
+#     email: dant@wetsnow.com
+#   requestPolicy:
+#     insecure:
+#       action: Route
+#   hostname: minecraft.wetsnow.com
+#   tlsSecret:
+#     name: minecraft.wetsnow.com
 # ---
 # apiVersion: getambassador.io/v2
 # kind: Host
@@ -316,3 +316,15 @@ spec:
   hostname: ambassador-admin.wetsnow.com
   tlsSecret:
     name: ambassador-admin.wetsnow.com
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: kafka-ui.wetsnow.com
+  namespace: ambassador
+spec:
+  acmeProvider:
+    email: dant@wetsnow.com
+  hostname: kafka-ui.wetsnow.com
+  tlsSecret:
+    name: kafka-ui.wetsnow.com

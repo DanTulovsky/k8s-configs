@@ -1,3 +1,5 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/kube-prometheus
+
 operator:
   service:
     type: ClusterIP
@@ -9,6 +11,8 @@ prometheus:
     annotations:
       # without this, prometheus fails to scrape node daemon sets?
       linkerd.io/inject: "disabled"
+
+  retention: 30d
 
   service:
     type: ClusterIP

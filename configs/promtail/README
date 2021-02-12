@@ -1,0 +1,1 @@
+Promtail collects logs from k8s and sends them to loki.

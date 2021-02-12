@@ -20,8 +20,8 @@ spec:
   rewrite: /poker.PokerServer/
   service: https://pepper-poker-grpc-service.poker:8443
   # https://github.com/datawire/ambassador/issues/3154
-  timeout_ms: 3600000 # required for steaming grpc; 1 hr; 0 is broken!
-  connect_timeout_ms: 5000
+  # timeout_ms: 3600000 # required for steaming grpc; 1 hr; 0 is broken!
+  timeout_ms: 0 # required for steaming grpc; 1 hr; 0 is broken!
   grpc: True
   headers:
     :authority: pepper-poker-grpc.wetsnow.com
@@ -207,6 +207,19 @@ spec:
   host: pgadmin.wetsnow.com
   resolver: endpoint
   service: pgadmin4.db:80
+  allow_upgrade:
+    - websocket
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: kafka-ui.wetsnow.com
+  namespace: ambassador
+spec:
+  prefix: /
+  host: kafka-ui.wetsnow.com
+  resolver: endpoint
+  service: kowl.kafka:80
   allow_upgrade:
     - websocket
 ---

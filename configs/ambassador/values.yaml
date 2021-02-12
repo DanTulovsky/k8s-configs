@@ -31,3 +31,5 @@ service:
       targetPort: 25565
   type: LoadBalancer
   externalTrafficPolicy: Local
+env:
+  AMBASSADOR_LEGACY_MODE: true

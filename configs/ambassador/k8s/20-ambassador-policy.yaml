@@ -21,21 +21,40 @@ spec:
 apiVersion: getambassador.io/v2
 kind: FilterPolicy
 metadata:
-  name: predator-policy
+  name: kowl-policy
   namespace: ambassador
 spec:
   rules:
-    - host: "predator.wetsnow.com"
+    - host: "kafka-ui.wetsnow.com"
       # note that "/" only protects "/" and not "/foo"
       path: "*"
       filters:
-        - name: keycloak-predator-filter ## Enter the Filter name from above
+        - name: keycloak-kowl-filter ## Enter the Filter name from above
           arguments:
             scope:
               # required scopes
               - "email"
               - "profile"
               - "default"
+# ---
+# apiVersion: getambassador.io/v2
+# kind: FilterPolicy
+# metadata:
+#   name: predator-policy
+#   namespace: ambassador
+# spec:
+#   rules:
+#     - host: "predator.wetsnow.com"
+#       # note that "/" only protects "/" and not "/foo"
+#       path: "*"
+#       filters:
+#         - name: keycloak-predator-filter ## Enter the Filter name from above
+#           arguments:
+#             scope:
+#               # required scopes
+#               - "email"
+#               - "profile"
+#               - "default"
 ---
 apiVersion: getambassador.io/v2
 kind: FilterPolicy

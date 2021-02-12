@@ -2,52 +2,31 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: default
-  annotations:
-    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: monitoring
-  annotations:
-    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: ambassador
-  annotations:
-    # enabling this causes ambassador to fail to log to linkerd
-    linkerd.io/inject: disabled
-    # this must be an opencensus collector
-    # config.linkerd.io/trace-collector: "linkerd-collector.linkerd:56678"
-    # config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: auth
-  annotations:
-    linkerd.io/inject: disabled
-    # this must be an opencensus collector
-    # config.linkerd.io/trace-collector: "linkerd-collector.linkerd:56678"
-    # config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: db
-  annotations:
-    linkerd.io/inject: disabled
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: web
-  annotations:
-    linkerd.io/inject: disabled
-    config.linkerd.io/trace-collector: "otel-collector.observability:55680"
-    # config.alpha.linkerd.io/trace-collector-service-account: default.observability
 ---
 apiVersion: v1
 kind: Namespace
@@ -81,16 +60,18 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: poker
-  annotations:
-    linkerd.io/inject: disabled
-    config.linkerd.io/trace-collector: "otel-collector.observability:55680"
-    # config.alpha.linkerd.io/trace-collector-service-account: default.observability
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: observability
-  annotations:
-    linkerd.io/inject: disabled
-    config.linkerd.io/trace-collector: "otel-collector.observability:55680"
-    # config.alpha.linkerd.io/trace-collector-service-account: default.observability
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kafka
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vector
