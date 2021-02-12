@@ -17,6 +17,9 @@ logSchema:
   sourceTypeKey: "source_type"
   timestampKey: "timestamp"
 
+vectorApi:
+  enabled: true
+
 # The "built-in" kubernetes logs source. Will be added by default, unless
 # explicitly disabled.
 kubernetesLogsSource:
