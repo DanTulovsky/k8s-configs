@@ -13,4 +13,4 @@ spec:
     - ":authority"
     - ":path"
   sampling:
-    overall: 10 # %
+    overall: 100 # %
