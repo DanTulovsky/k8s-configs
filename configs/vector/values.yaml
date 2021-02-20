@@ -58,24 +58,24 @@ sinks:
     rawConfig: |
       endpoint = "http://loki.monitoring:3100"
       remove_timestamp = true
-      encoding.codec = "json"
-      labels.forwarder = "vector"
-      labels.file = "{{ file }}"
-      labels.stream = "{{ stream }}"
-      labels.source_type = "{{ source_type }}"
-      labels.namespace = "{{ kubernetes.pod_namespace }}"
-      labels.pod_name = "{{ kubernetes.pod_name }}"
-      labels.pod_uid = "{{ kubernetes.pod_uid }}"
-      labels.pod_ip = "{{ kubernetes.pod_ip }}"
-      labels.pod_ips = "{{ kubernetes.pod_ips }}"
-      labels.pod_node_name = "{{ kubernetes.pod_node_name }}"
-      labels.app = "{{ kubernetes.pod_labels.app }}"
-      labels.kubernetes_io_instance = "{{ kubernetes.pod_labels.app.kubernetes.io/instance }}"
-      labels.kubernetes_io_component = "{{ kubernetes.pod_labels.app.kubernetes.io/component }}"
-      labels.kubernetes_io_name = "{{ kubernetes.pod_labels.app.kubernetes.io/name }}"
-      labels.source_type = "{{ source_type }}"
-      labels.container_name = "{{ kubernetes.container_name }}"
-      labels.container_image = "{{ kubernetes.container_image }}"
+      encoding.codec = 'json'
+      labels.forwarder = 'vector'
+      labels.file = '{{ file }}'
+      labels.stream = '{{ stream }}'
+      labels.source_type = '{{ source_type }}'
+      labels.namespace = '{{ kubernetes.pod_namespace }}'
+      labels.pod_name = '{{ kubernetes.pod_name }}'
+      labels.pod_uid = '{{ kubernetes.pod_uid }}'
+      labels.pod_ip = '{{ kubernetes.pod_ip }}'
+      labels.pod_ips = '{{ kubernetes.pod_ips }}'
+      labels.pod_node_name = '{{ kubernetes.pod_node_name }}'
+      labels.app = '{{ kubernetes.pod_labels.app }}'
+      labels.kubernetes_io_instance = '{{ kubernetes.pod_labels.app\.kubernetes\.io/instance }}'
+      labels.kubernetes_io_component = '{{ kubernetes.pod_labels.app\.kubernetes\.io/component }}'
+      labels.kubernetes_io_name = '{{ kubernetes.pod_labels.app\.kubernetes\.io/name }}'
+      labels.source_type = '{{ source_type }}'
+      labels.container_name = '{{ kubernetes.container_name }}'
+      labels.container_image = '{{ kubernetes.container_image }}'
       request.in_flight_limit = 1
   kafka0:
     type: kafka
