@@ -142,20 +142,20 @@ spec:
 #   timeout_ms: 0 # required for grpc
 #   allow_upgrade:
 #     - websocket
----
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: predator.wetsnow.com
-  namespace: ambassador
-spec:
-  prefix: /
-  host: predator.wetsnow.com
-  resolver: endpoint
-  service: predator.loadtest:8080
-  allow_upgrade:
-    - websocket
----
+# ---
+# apiVersion: getambassador.io/v2
+# kind: Mapping
+# metadata:
+#   name: predator.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   prefix: /
+#   host: predator.wetsnow.com
+#   resolver: endpoint
+#   service: predator.loadtest:8080
+#   allow_upgrade:
+#     - websocket
+# ---
 # apiVersion: getambassador.io/v2
 # kind: Mapping
 # metadata:
@@ -171,18 +171,18 @@ spec:
 #   allow_upgrade:
 #     - websocket
 # ---
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: jaeger.wetsnow.com
-  namespace: ambassador
-spec:
-  prefix: /
-  host: jaeger.wetsnow.com
-  resolver: endpoint
-  service: jaeger-query.observability:16686
-  allow_upgrade:
-    - websocket
+# apiVersion: getambassador.io/v2
+# kind: Mapping
+# metadata:
+#   name: jaeger.wetsnow.com
+#   namespace: ambassador
+# spec:
+#   prefix: /
+#   host: jaeger.wetsnow.com
+#   resolver: endpoint
+#   service: jaeger-query.observability:16686
+#   allow_upgrade:
+#     - websocket
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
