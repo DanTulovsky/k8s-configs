@@ -126,7 +126,6 @@ dashboards:
       gnetId: 9367
       revision: 2
       datasource: Prometheus
-      tag: helm
     node-exporter:
       gnetId: 1860
       revision: 21
@@ -199,14 +198,6 @@ dashboards:
     loki-stats:
       gnetId: 13407
       revision: 1
-      datasource: Prometheus
-    nginx:
-      gnetId: 11199
-      revision: 1
-      datasource: Prometheus
-    predator:
-      gnetId: 11651
-      revision: 2
       datasource: Prometheus
     jaeger:
       gnetId: 12535
