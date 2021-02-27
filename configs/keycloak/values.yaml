@@ -23,9 +23,9 @@ cache:
 
 replicaCount: 2
 
-podAnnotations:
-  config.linkerd.io/skip-inbound-ports: "7600" # skip keycloak cluster discovery
-  config.linkerd.io/skip-outbound-ports: "7600"
+# podAnnotations:
+#   config.linkerd.io/skip-inbound-ports: "7600" # skip keycloak cluster discovery
+#   config.linkerd.io/skip-outbound-ports: "7600"
 
 containerPorts:
   http: 8080
@@ -76,22 +76,22 @@ postgresql:
 
 extraEnvVarsSecret: keycloak-db-secret
 
-extraEnvVars:
-  - name: JAEGER_REPORTER_LOG_SPANS
-    value: "true"
-  - name: JAEGER_SAMPLER_TYPE
-    value: "const"
-  - name: JAEGER_SAMPLER_PARAM
-    value: "1"
-  - name: JAEGER_SERVICE_NAME
-    value: "keycloak"
-  - name: JAEGER_ENDPOINT
-    value: "http://linkerd-collector.linkerd:14268/api/traces"
-  - name: KEYCLOAK_STATISTICS
-    value: ""
+# extraEnvVars:
+#   - name: JAEGER_REPORTER_LOG_SPANS
+#     value: "true"
+#   - name: JAEGER_SAMPLER_TYPE
+#     value: "const"
+#   - name: JAEGER_SAMPLER_PARAM
+#     value: "1"
+#   - name: JAEGER_SERVICE_NAME
+#     value: "keycloak"
+#   - name: JAEGER_ENDPOINT
+#     value: "http://linkerd-collector.linkerd:14268/api/traces"
+#   - name: KEYCLOAK_STATISTICS
+#     value: ""
 
 externalDatabase:
   enabled: true
   # host set in secret above
-  host: "pgsql-postgresql.db"
+  host: "db1.gke-internal.wetsnow.com"
   # values in keycloak-db-secret

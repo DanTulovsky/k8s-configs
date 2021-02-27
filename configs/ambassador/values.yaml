@@ -12,24 +12,36 @@ resources:
   requests:
     cpu: 200m
     memory: 300Mi
+adminService:
+  annotations: {}
+  create: true
+  port: 8877
+  type: NodePort
 service:
   annotations:
-    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
-    service.beta.kubernetes.io/do-loadbalancer-hostname: "do.wetsnow.com"
-    service.beta.kubernetes.io/do-loadbalancer-algorithm: "least_connections"
-    service.beta.kubernetes.io/do-loadbalancer-protocol: "tcp"
+    #   service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+    #   service.beta.kubernetes.io/do-loadbalancer-hostname: "do.wetsnow.com"
+    #   service.beta.kubernetes.io/do-loadbalancer-algorithm: "least_connections"
+    #   service.beta.kubernetes.io/do-loadbalancer-protocol: "tcp"
+    # kubernetes.io/ingress.global-static-ip-name: "ambassador"
+    cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/backend-config: '{"default": "ambassador-hc-config"}'
+    cloud.google.com/app-protocols: '{"grpc": "HTTP2"}'
   externalIPs: []
   ports:
     - name: http
-      port: 80
+      port: 8080
       targetPort: 8080
-    - name: https
-      port: 443
+    - name: grpc
+      port: 8443
       targetPort: 8443
-    - name: minecraft
-      port: 25565
-      targetPort: 25565
-  type: LoadBalancer
-  externalTrafficPolicy: Local
+    # - name: minecraft
+    #   port: 25565
+    #   targetPort: 25565
+  # type: LoadBalancer
+  type: NodePort
+  # This breaks on GKE, perhaps healthCheckNodePort is needed?
+  # externalTrafficPolicy: Cluster
+  # externalTrafficPolicy: Local
 env:
-  AMBASSADOR_LEGACY_MODE: true
+  AMBASSADOR_LEGACY_MODE: false

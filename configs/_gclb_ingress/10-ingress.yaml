@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: wetsnow-ingress
+  namespace: ambassador
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: global-ip0
+    networking.gke.io/managed-certificates: wetsnow-certs
+    kubernetes.io/ingress.class: "gce"
+spec:
+  backend:
+    serviceName: ambassador
+    servicePort: 8080

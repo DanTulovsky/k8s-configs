@@ -1,27 +1,22 @@
-apiVersion: getambassador.io/v2
-kind: Module
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
 metadata:
-  name: ambassador
-  namespace: ambassador
+  name: wetsnow-grpc-ingress
+  namespace: poker
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: global-grpc-ip0
+    networking.gke.io/managed-certificates: wetsnow-grpc-certs
+    kubernetes.io/ingress.class: "gce"
 spec:
-  config:
-    # use_proxy_proto: true
-    xff_num_trusted_hops: 1
-    envoy_log_type: json
-    diagnostics:
-      enabled: true
----
-apiVersion: getambassador.io/v2
-kind: KubernetesEndpointResolver
-metadata:
-  name: endpoint
-  namespace: ambassador
+  backend:
+    serviceName: pepper-poker-grpc-service
+    servicePort: 8443
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: ambassador-hc-config
-  namespace: ambassador
+  name: pepper-poker-grpc-hc-config
+  namespace: poker
 spec:
   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features
   timeoutSec: 30
@@ -38,6 +33,6 @@ spec:
   healthCheck:
     checkIntervalSec: 10
     timeoutSec: 10
-    port: 8877
+    port: 8081 # this is checking the http port, not grpc!
     type: HTTP
-    requestPath: /ambassador/v0/check_alive
+    requestPath: /healthz

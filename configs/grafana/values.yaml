@@ -191,18 +191,6 @@ dashboards:
       gnetId: 10441
       revision: 1
       datasource: Prometheus
-    loki:
-      gnetId: 10880
-      revision: 1
-      datasource: Prometheus
-    loki-stats:
-      gnetId: 13407
-      revision: 1
-      datasource: Prometheus
-    jaeger:
-      gnetId: 12535
-      revision: 1
-      datasource: Prometheus
     otel-collector:
       gnetId: 12553
       revision: 1
@@ -249,7 +237,8 @@ grafana.ini:
     type: "database"
   database:
     type: postgres
-    host: pgsql-postgresql.db:5432
+    # host: pgsql-postgresql.db:5432
+    host: db1.gke-internal.wetsnow.com:5432
     name: grafana
     user: grafana
     log_queries: false

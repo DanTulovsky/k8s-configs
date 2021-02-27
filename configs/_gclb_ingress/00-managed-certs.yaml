@@ -1,0 +1,17 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: wetsnow-certs
+  namespace: ambassador
+spec:
+  domains:
+    - wetsnow.com
+    - www.wetsnow.com
+    - ambassador-admin.wetsnow.com
+    - pepper-poker.wetsnow.com
+    - grafana.wetsnow.com
+    - login.wetsnow.com
+    - www.dusselskolk.com
+    - prometheus.wetsnow.com
+    - pgadmin.wetsnow.com
+    - kafka-ui.wetsnow.com

@@ -64,7 +64,6 @@ spec:
             - containerPort: 6831
               name: thrift-compact
               protocol: UDP
-
           volumeMounts:
             - name: otel-collector-config-vol
               mountPath: /conf

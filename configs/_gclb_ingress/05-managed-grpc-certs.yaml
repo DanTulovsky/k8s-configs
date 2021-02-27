@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: wetsnow-grpc-certs
+  namespace: poker
+spec:
+  domains:
+    - pepper-poker-grpc.wetsnow.com
