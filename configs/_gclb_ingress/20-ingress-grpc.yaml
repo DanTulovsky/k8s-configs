@@ -19,7 +19,7 @@ metadata:
   namespace: poker
 spec:
   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features
-  timeoutSec: 30
+  timeoutSec: 86400
   connectionDraining:
     drainingTimeoutSec: 30
   customRequestHeaders:
