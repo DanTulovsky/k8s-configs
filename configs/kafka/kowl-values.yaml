@@ -6,3 +6,11 @@ kowl:
     kafka:
       brokers:
         - kafka0-headless:9092
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi

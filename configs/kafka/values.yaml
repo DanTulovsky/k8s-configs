@@ -5,7 +5,18 @@ extraEnvVars:
   - name: KAFKA_CFG_COMPRESSION_TYPE
     value: "gzip"
 
-replicaCount: 2
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 1.4Gi
+  requests:
+    cpu: 200m
+    memory: 1.2Gi
+
+livenessProbe:
+  initialDelaySeconds: 300 # java is slow to startup
 
 metrics:
   kafka:
@@ -15,6 +26,13 @@ metrics:
     namespace: monitoring
   jmx:
     enabled: true
+  resources:
+    limits:
+      cpu: 5m
+      memory: 64Mi
+    requests:
+      cpu: 5m
+      memory: 64Mi
 
 rbac:
   create: true
@@ -70,3 +88,6 @@ provisioning:
         # max.message.bytes: 64000
         # flush.messages: 1
         compression.type: "gzip"
+
+zookeeper:
+  enabled: true

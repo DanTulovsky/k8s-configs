@@ -1,10 +1,11 @@
+# https://artifacthub.io/packages/helm/runix/pgadmin4
 env:
   email: dant@wetsnow.com
 
 resources:
   limits:
-    cpu: 500m
-    memory: 200Mi
+    cpu: 100m
+    memory: 256Mi
   requests:
-    cpu: 500m
-    memory: 200Mi
+    cpu: 100m
+    memory: 128Mi

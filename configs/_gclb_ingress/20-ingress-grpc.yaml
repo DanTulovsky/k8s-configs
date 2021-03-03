@@ -19,6 +19,7 @@ metadata:
   namespace: poker
 spec:
   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features
+  # this affect streaming grpc, max time a stream can exist
   timeoutSec: 86400
   connectionDraining:
     drainingTimeoutSec: 30

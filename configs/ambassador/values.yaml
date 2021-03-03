@@ -5,13 +5,16 @@ licenseKey:
 metrics:
   serviceMonitor:
     enabled: true
+
+replicaCount: 1
+
 resources:
   limits:
-    cpu: 1000m
-    memory: 600Mi
+    cpu: 300m
+    memory: 256Mi
   requests:
-    cpu: 200m
-    memory: 300Mi
+    cpu: 300m
+    memory: 256Mi
 adminService:
   annotations: {}
   create: true

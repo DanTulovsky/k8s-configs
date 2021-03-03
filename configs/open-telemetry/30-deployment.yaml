@@ -14,7 +14,7 @@ spec:
       component: otel-collector
   minReadySeconds: 5
   progressDeadlineSeconds: 120
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -32,11 +32,11 @@ spec:
           name: otel-collector
           resources:
             limits:
-              cpu: "1"
-              memory: 1Gi
+              cpu: "20m"
+              memory: 312Mi
             requests:
-              cpu: 200m
-              memory: 400Mi
+              cpu: 20m
+              memory: 312Mi
           ports:
             - containerPort: 55678 # Default endpoint for opencensus
               name: opencensus

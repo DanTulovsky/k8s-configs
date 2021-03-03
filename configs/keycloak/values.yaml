@@ -21,7 +21,7 @@ cache:
   ##
   authOwnersCount: 2
 
-replicaCount: 2
+replicaCount: 1
 
 # podAnnotations:
 #   config.linkerd.io/skip-inbound-ports: "7600" # skip keycloak cluster discovery
@@ -33,13 +33,21 @@ containerPorts:
 
 ## Keycloak containers' liveness and readiness probes.
 livenessProbe:
-  initialDelaySeconds: 600 # java is slow to startup
+  initialDelaySeconds: 1000 # java is slow to startup
 
 service:
   type: ClusterIP
   port: 8080
   httpsPort: 443
   clusterIP: None
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 1Gi
 
 rbac:
   create: true

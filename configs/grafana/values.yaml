@@ -1,4 +1,4 @@
-replicas: 2
+replicas: 1
 
 podDisruptionBudget:
   minAvailable: 1
@@ -7,7 +7,15 @@ image:
   pullPolicy: IfNotPresent
   repository: grafana/grafana
   sha: ""
-  tag: 7.4.0-beta1
+  tag: 7.4.3
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 
 service:
   type: ClusterIP
@@ -162,22 +170,18 @@ dashboards:
       gnetId: 741
       revision: 1
       datasource: Prometheus
-    k8s-mon:
-      gnetId: 315
-      revision: 3
-      datasource: Prometheus
-    postgres-overview:
-      gnetId: 455
-      revision: 2
-      datasource: Prometheus
-    postgres-overview-2:
-      gnetId: 9628
-      revision: 6
-      datasource: Prometheus
-    postgres-overview-3:
-      gnetId: 10521
-      revision: 1
-      datasource: Prometheus
+    # postgres-overview:
+    #   gnetId: 455
+    #   revision: 2
+    #   datasource: Prometheus
+    # postgres-overview-2:
+    #   gnetId: 9628
+    #   revision: 6
+    #   datasource: Prometheus
+    # postgres-overview-3:
+    #   gnetId: 10521
+    #   revision: 1
+    #   datasource: Prometheus
     prometheus-overview:
       gnetId: 3662
       revision: 2
@@ -244,6 +248,8 @@ grafana.ini:
     log_queries: false
     ssl_mode: disable
     conn_max_lifetime: 2000
+    max_open_conn: 300
+    max_idle_conn: 2
   tracing.jaeger:
     # env used below
     address: otel-collector.observability:6831
