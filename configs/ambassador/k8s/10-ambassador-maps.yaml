@@ -9,43 +9,6 @@ spec:
   prefix: /edge_stack/
   rewrite: /edge_stack_ui/edge_stack/
   service: localhost:8500
-# ---
-# apiVersion: getambassador.io/v2
-# kind: Mapping
-# metadata:
-#   name: pepper-poker-grpc-server-mapping
-#   namespace: ambassador
-# spec:
-#   prefix: /poker.PokerServer/
-#   rewrite: /poker.PokerServer/
-#   service: https://pepper-poker-grpc-service.poker:8443
-#   # https://github.com/datawire/ambassador/issues/3154
-#   # timeout_ms: 3600000 # required for steaming grpc; 1 hr; 0 is broken!
-#   timeout_ms: 0 # required for steaming grpc; 1 hr; 0 is broken!
-#   grpc: True
-#   headers:
-#     :authority: pepper-poker-grpc.wetsnow.com
-#   resolver: endpoint
-#   load_balancer:
-#     policy: least_request
-#   host: "pepper-poker-grpc.wetsnow.com"
-# ---
-# apiVersion: getambassador.io/v2
-# kind: Mapping
-# metadata:
-#   name: pepper-poker-grpcreflect
-#   namespace: ambassador
-# spec:
-#   grpc: true
-#   prefix: /grpc.
-#   rewrite: /grpc.
-#   service: https://pepper-poker-grpc-service.poker:8443
-#   headers:
-#     :authority: pepper-poker-grpc.wetsnow.com
-#   resolver: endpoint
-#   load_balancer:
-#     policy: least_request
-#   host: "pepper-poker-grpc.wetsnow.com"
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping

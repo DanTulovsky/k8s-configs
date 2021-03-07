@@ -9,6 +9,7 @@ spec:
     - www.wetsnow.com
     - ambassador-admin.wetsnow.com
     - pepper-poker.wetsnow.com
+    - pepper-poker-grpc.wetsnow.com
     - grafana.wetsnow.com
     - login.wetsnow.com
     - www.dusselskolk.com

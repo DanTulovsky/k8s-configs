@@ -27,48 +27,6 @@ spec:
     protectedOrigins:
       - origin: https://kafka-ui.wetsnow.com
 ---
-# apiVersion: getambassador.io/v2
-# kind: Filter
-# metadata:
-#   name: keycloak-linkerd-filter
-#   namespace: ambassador
-# spec:
-#   OAuth2:
-#     authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
-#     clientID: default.wetsnow.com
-#     secretName: default-keycloak-secret
-#     # These are simply authorized_callbacks!
-#     protectedOrigins:
-#       - origin: https://linkerd.wetsnow.com
-# ---
-# apiVersion: getambassador.io/v2
-# kind: Filter
-# metadata:
-#   name: keycloak-jaeger-filter
-#   namespace: ambassador
-# spec:
-#   OAuth2:
-#     authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
-#     clientID: default.wetsnow.com
-#     secretName: default-keycloak-secret
-#     # These are simply authorized_callbacks!
-#     protectedOrigins:
-#       - origin: https://jaeger.wetsnow.com
-# ---
-# apiVersion: getambassador.io/v2
-# kind: Filter
-# metadata:
-#   name: keycloak-predator-filter
-#   namespace: ambassador
-# spec:
-#   OAuth2:
-#     authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
-#     clientID: default.wetsnow.com
-#     secretName: default-keycloak-secret
-#     # These are simply authorized_callbacks!
-#     protectedOrigins:
-#       - origin: https://predator.wetsnow.com
-# ---
 apiVersion: getambassador.io/v2
 kind: Filter
 metadata:
@@ -97,19 +55,3 @@ spec:
     protectedOrigins:
       - origin: https://pepper-poker.wetsnow.com
       # - origin: https://pepper-poker-grpc.wetsnow.com
----
-# apiVersion: getambassador.io/v2
-# kind: Filter
-# metadata:
-#   name: keycloak-n8n-filter
-#   namespace: ambassador
-# spec:
-#   OAuth2:
-#     authorizationURL: https://login.wetsnow.com/auth/realms/wetsnow
-#     clientID: n8n.wetsnow.com
-#     secretName: n8n-keycloak-secret
-#     # These are simply authorized_callbacks!
-#     protectedOrigins:
-#       - origin: https://n8n.wetsnow.com
-# ---
-
